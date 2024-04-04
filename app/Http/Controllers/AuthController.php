@@ -53,10 +53,7 @@ class AuthController extends Controller
                 return redirect('index');
             } elseif(Auth::user()->role_id == 2) {
                 return redirect('dashboard');
-            } else {
-                return redirect ('/');
             }
-
         } else {
             Session::flash('message','Account not found');
             return redirect('/');
