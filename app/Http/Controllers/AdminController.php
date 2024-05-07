@@ -14,9 +14,9 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function create()
+    public function createArticle()
     {
-        return view('admin.article.create');
+        return view('admin.article');
     }
 
     public function store(Request $request)

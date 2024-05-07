@@ -26,3 +26,7 @@ Route::get('history', [UserController::class, 'getHistory']);
 Route::get('history', [schedulepickupController::class, 'getHistory']);
 
 Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
+
+//route article 
+
+Route::get('article', [AdminController::class, 'createArticle']);
