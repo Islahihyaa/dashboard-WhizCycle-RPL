@@ -139,6 +139,12 @@
           <span>Customer Service</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/manage-vehicles')}}">
+          <i class="bi bi-truck"></i>
+          <span>Kelola Kendaraan</span>
+        </a>
+      </li>
     </ul>
 
   </aside><!-- End Sidebar-->
