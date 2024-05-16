@@ -29,20 +29,15 @@ Route::delete('order/{id}', [UserController::class, 'destroy'])->name('destroy')
 
 Route::get('history', [UserController::class, 'index'])->name('history.index');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-
-Route::get('history', [UserController::class, 'getHistory'])->name('history');
-
-Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('deleteHistory');
-Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history');
-
-Route::delete('history/{id}', [UserController::class, 'destroy'])->name('history.destroy');
-Route::delete('history/{id}', [UserController::class, 'delete'])->name('history.delete');
-
-Route::resource('order', 'UserController');
-
-Route::delete('/history/{id}', 'HistoryController@deleteHistory')->name('history.delete');
-
-
+Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
 
 Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);   
+
+//* Kelola Kendaraan
+Route::get('manage-vehicles', [AdminController::class, 'getManageVehicle']);
+Route::put('manage-vehicles/{vehicle_id}', [AdminController::class, 'updateStatusVehicle'])->name('status-vehicle.update');
+Route::get('add-vehicles', [AdminController::class, 'getAddVehicle']);
+Route::post('add-vehicles', [AdminController::class, 'submitAddVehicle']);
+Route::get('manage-vehicles/{vehicle_id}', [AdminController::class, 'deleteVehicle'])->name('data-vehicle.delete');
+//* End Kelola Kendaraan
 

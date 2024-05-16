@@ -68,56 +68,36 @@ class UserController extends Controller
         $data_order = Order::all();
         return view('historyschedulepickup.index', ['data_order' => $data_order]);
     }
-    
-    public function deleteHistory($id)
-    {
-        $order = Order::findOrFail($id);
-        $order->delete();
-        return redirect()->route('history')->with('success', 'Data history berhasil dihapus');
-    }
 
-    
+    public function index()
+    {
+        // Ambil semua data riwayat dari model Order
+        $data_order = Order::all();
 
-    public function getRedeemspoints()
-    {
-        return view('customer.redeempoint1');
+        // Kembalikan data riwayat ke tampilan
+        return view('history.index', ['data_order' => $data_order]);
     }
-    
-    public function destroy($id)
-    {
-        // Cari mobil berdasarkan ID
-        $order = Order::find($id);
-    
-        // Pastikan mobil ditemukan
-        if (!$order) {
-            return redirect()->back()->with('error', 'order tidak ditemukan.');
+        
+        public function deleteHistory($id)
+        {
+            // Cari data riwayat berdasarkan ID
+            $order = Order::find($id);
+            
+            // Pastikan data riwayat ditemukan
+            if (!$order) {
+                return redirect()->back()->with('error', 'Data riwayat tidak ditemukan.');
+            }
+            
+            // Hapus data riwayat
+            $order->delete();
+            
+            // Redirect kembali ke halaman riwayat dengan pesan sukses
+            return redirect()->route('history.index')->with('success', 'Data riwayat berhasil dihapus.');
         }
+        
+    }
     
-        // Hapus mobil
-        $order->delete();
     
-        // Redirect kembali ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
-    }   
-    
-}
-
-//     public function delete($id)
-// {
-//     // Cari mobil berdasarkan ID
-//     $order = Order::find($id);
-
-//     // Pastikan mobil ditemukan
-//     if (!$history) {
-//         return redirect()->back()->with('error', 'order tidak ditemukan.');
-//     }
-
-//     // Hapus mobil
-//     $history->delete();
-
-//     // Redirect kembali ke halaman sebelumnya dengan pesan sukses
-//     return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
-// }
 
 
 
