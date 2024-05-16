@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -72,5 +74,36 @@ class UserController extends Controller
     {
         return view('customer.redeempoint1');
     }
+
+    public function getCustomerService()
+    {
+        return view('customer.customer-service');
+    }
+
+    public function submitComplaint(Request $request)
+    {       
+        $request->validate([
+            'name' => 'required',
+            'phoneNo' => 'required',
+            'email' => 'required',
+            'subjek' => 'required',
+            'description' => 'required',
+        ]);
+
+        $user_id = Auth::id();
+
+        $complaintsubmission = Complaint::create([
+            'user_id' => $user_id,
+            'email' => $request->input('email'),
+            'subjek'=> $request->input('subjek'),
+            'description' => $request->input('description'),
+        ]);
+
+        if($complaintsubmission) {
+            Session::flash('status','Tiket Berhasil Dikirimkan');
+            return redirect('customer-service');
+        }
+    }
+
     
 }
