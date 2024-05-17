@@ -115,19 +115,26 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
           <i class="bi bi-clock-history"></i>
-          <span>Riwayat</span>
+          <span>Riwayat pesanan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link <?= request()->segment(1) != "redeem-point" ?  "collapsed" :"" ?>" href="<?= url('redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link <?= request()->segment(1) != "history-all-redeem-point" ?  "collapsed" :"" ?>" href="<?= url('history-all-redeem-point') ?>">
+          <i class="bi bi-star-fill"></i>
+          <span>Riwayat Tukar Point </span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/add-article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>

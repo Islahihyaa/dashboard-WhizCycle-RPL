@@ -25,6 +25,7 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    @stack('styles')
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -128,23 +129,25 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#">
+        <a class="nav-link collapsed" href="{{url('/article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <a class="nav-link collapsed" href="customer-service">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/manage-vehicles')}}">
           <i class="bi bi-truck"></i>
           <span>Kelola Kendaraan</span>
         </a>
-      </li>
+      </li> -->
+
     </ul>
 
   </aside><!-- End Sidebar-->
