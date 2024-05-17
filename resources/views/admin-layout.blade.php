@@ -99,50 +99,51 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="dashboard" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('dashboard')" href="{{url('/dashboard')}}">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="order" data-bs-target="#collapseOrder">
+        <a class="nav-link @yield('manage-order')" href="{{url('/manage-order')}}">
           <i class="bi bi-truck"></i>
           <span>Setoran Sampah</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-          <i class="bi bi-clock-history"></i>
-          <span>Riwayat</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link @yield('redeem-point')" href="{{url('/manage-points')}}">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link @yield('manage-article')" href="{{url('/manage-article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="response-complaint">
+        <a class="nav-link @yield('response-complaint')" href="{{url('/response-complaint')}}">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('/manage-vehicles')}}">
+        <a class="nav-link @yield('manage-vehicles')" href="{{url('/manage-vehicles')}}">
           <i class="bi bi-truck"></i>
           <span>Kelola Kendaraan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @yield('manage-driver')" href="{{url('/manage-driver')}}">
+          <i class="bi bi-person-walking"></i>
+          <span>Kelola Driver</span>
         </a>
       </li>
     </ul>
