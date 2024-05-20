@@ -39,13 +39,13 @@ Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
 
 //* End Redeems Points
 
-//* Customer Sercice 
+//* Customer Sercice
 Route::get('customer-service', [UserController::class, 'getCustomerService']);
 Route::post('customer-service', [UserController::class, 'submitComplaint']);
 Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
 Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
 
-//* End Customer Sercice 
+//* End Customer Sercice
 
 
 /*--------------------------------------------------------------
@@ -53,3 +53,10 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 --------------------------------------------------------------*/
 
 Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
+
+//Storan Sampah
+Route::get('manage-order', [AdminController::class, 'getManageOrder']);
+Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
+Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
+
+//End Setoran Sampah
