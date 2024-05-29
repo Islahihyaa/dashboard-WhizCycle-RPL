@@ -58,3 +58,8 @@ Route::get('response-complaint', [AdminController::class, 'getResponseComplaint'
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
 // Resource Route
+Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
+
+//route article 
+
+Route::get('article', [AdminController::class, 'createArticle']);

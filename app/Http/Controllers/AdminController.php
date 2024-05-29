@@ -7,9 +7,11 @@ use App\Models\Order;
 use App\Models\Complaint;
 use App\Models\RedeemPoint;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Role; // Import the Role model
+use App\Models\article;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -104,4 +106,30 @@ class AdminController extends Controller
     //     $complaintdata = Complaint::all();
     //     return view('admin.response-complaint', compact('laboratoriums'));
     // }
+    public function createArticle()
+    {
+        return view('admin.article');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'foto' => 'required|image|max:1024',
+        ]);
+
+        $foto = $request->file('foto');
+        $namaFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
+        $foto->storeAs('article', $namaFoto);
+
+        article::create([
+            'judul' => $request->input('judul'),
+            'deskripsi' => $request->input('deskripsi'),
+            'foto' => $namaFoto,
+        ]);
+
+        return redirect()->route('admin.article.index')->with('success', 'Artikel edukasi lingkungan berhasil dibuat!');
+    }
 }
+
