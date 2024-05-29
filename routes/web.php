@@ -74,8 +74,8 @@ Route::get('history', [schedulepickupController::class, 'getHistory']);
 
 
 //* End Redeems Points
-Route::get('customer-service', [UserController::class, 'getCustomerService']);
-Route::post('customer-service', [UserController::class, 'submitComplaint']);
+
+//* Customer Sercice
 Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
 Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
 
