@@ -29,8 +29,6 @@ Route::get('logout', [AuthController::class, 'logout']);
 
 // User Routes
 Route::get('home', [UserController::class, 'getHome']);
-Route::get('order', [UserController::class, 'createOrder']);
-Route::post('order', [UserController::class, 'submitOrder'])->name('order');
 Route::delete('order/{id}', [AdminController::class, 'destroy'])->name('order.destroy');
 
 // History Routes
@@ -57,13 +55,9 @@ Route::get('response-complaint', [AdminController::class, 'getResponseComplaint'
 // User Store Route
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 
-// Resource Route
-Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
-
 //route article 
 
 Route::get('article', [AdminController::class, 'createArticle']);
-Route::get('dashboard', [AdminController::class, 'getDashboard']);
 
 //* End Authentication
 
@@ -78,12 +72,8 @@ Route::get('history', [schedulepickupController::class, 'getHistory']);
 
 //* End History
 
-//* Redeems Points
-Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
 
 //* End Redeems Points
-
-//* Customer Sercice
 Route::get('customer-service', [UserController::class, 'getCustomerService']);
 Route::post('customer-service', [UserController::class, 'submitComplaint']);
 Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
@@ -95,9 +85,6 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 /*--------------------------------------------------------------
 # Admin
 --------------------------------------------------------------*/
-
-Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
-
 //Storan Sampah
 Route::get('manage-order', [AdminController::class, 'getManageOrder']);
 Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
