@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RedeemPoint;
-use App\Models\Complaint;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -130,8 +130,7 @@ class UserController extends Controller
             Session::flash('status','Tiket Berhasil Dikirimkan');
             return redirect('customer-service');
         }
-    }
-    
+    }    
 }
 
 //     public function delete($id)

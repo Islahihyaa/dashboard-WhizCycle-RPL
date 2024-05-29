@@ -50,7 +50,6 @@ h6 {
 --------------------------------------------------------------*/
 .pagetitle {
   margin: 10px 0 20px 0;
-  margin-bottom: 10px;
 }
 
 .pagetitle h1 {
@@ -58,7 +57,6 @@ h6 {
   margin-bottom: 0;
   font-weight: 600;
   color: #276561;
-  color: #012970;
 }
 
 /*--------------------------------------------------------------
@@ -71,7 +69,6 @@ h6 {
   font-family: 'Poppins', sans-serif;
   border-radius: 15px;
   padding: 10px 0 10px 0 ;
-  padding: 10px 10px 10px 10px ;
 }
 
 .btn-custom:hover {
@@ -1285,7 +1282,6 @@ h6 {
   width: 25px;
   height: 25px;
   
-  background-color: #276561; 
   border-radius: 50%;
   color: white;
   font-size: 14px;

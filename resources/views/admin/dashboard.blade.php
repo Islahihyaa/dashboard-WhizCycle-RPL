@@ -1,6 +1,6 @@
 @extends('admin-layout')
 
-@section('title', 'WhizCycle')
+@section('title', 'Admin WhizCycle')
 
 @section('content')
 

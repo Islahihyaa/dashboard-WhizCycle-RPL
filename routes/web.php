@@ -63,3 +63,44 @@ Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
 //route article 
 
 Route::get('article', [AdminController::class, 'createArticle']);
+Route::get('dashboard', [AdminController::class, 'getDashboard']);
+
+//* End Authentication
+
+//* Penjemputan Sampah
+Route::get('order', [UserController::class, 'createOrder']);
+Route::post('order', [UserController::class, 'submitOrder'])->name('order');
+//* End Penjemputan Sampah
+
+//* History
+Route::get('history', [UserController::class, 'getHistory']);
+Route::get('history', [schedulepickupController::class, 'getHistory']);
+
+//* End History
+
+//* Redeems Points
+Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
+
+//* End Redeems Points
+
+//* Customer Sercice
+Route::get('customer-service', [UserController::class, 'getCustomerService']);
+Route::post('customer-service', [UserController::class, 'submitComplaint']);
+Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
+Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
+
+//* End Customer Sercice
+
+
+/*--------------------------------------------------------------
+# Admin
+--------------------------------------------------------------*/
+
+Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
+
+//Storan Sampah
+Route::get('manage-order', [AdminController::class, 'getManageOrder']);
+Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
+Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
+
+//End Setoran Sampah
