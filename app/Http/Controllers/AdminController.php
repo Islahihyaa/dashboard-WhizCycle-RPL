@@ -3,8 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Complaint;
 use App\Models\Vehicle;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Order;
+use App\Models\Driver;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controller;
 use Session;
 
 class AdminController extends Controller
@@ -12,6 +20,30 @@ class AdminController extends Controller
     public function getDashboard()
     {
         return view('admin.dashboard');
+    }
+
+    public function getManageUser()
+    {
+        return view('admin.manageuser');
+    }
+
+    public function showUsers()
+    {
+        $users = User::all(); // Fetch all users from the database
+        return view('admin.manageuser', ['users' => $users]);
+    }
+    
+    public function edit(User $user)
+    {
+        return view('admin.edit', compact('user'));
+    }
+
+    public function update(Request $request, User $user) 
+    {
+    $user->update($request->all());
+
+    // Redirect to a page after updating
+    return redirect()->route('manageuser')->with('success', 'User updated successfully.');
     }
 
     public function getResponseComplaint()
@@ -89,7 +121,7 @@ class AdminController extends Controller
         $statusVehicle->status_vehicle = $request->input('status_vehicle');
         $statusVehicle->save();
 
-        Session::flash('updateStatusVehicle',"Data Updated To $statusVehicle->status_vehicle");
+        Session::flash('updateStatusVehicle',"Data berhasil diubah menjadi $statusVehicle->status_vehicle");
         return redirect('manage-vehicles');
 
     }
@@ -97,15 +129,196 @@ class AdminController extends Controller
     public function deleteVehicle($vehicle_id)
     {
         $deleteVehicle = Vehicle::find($vehicle_id);
-        $deleteVehicle->delete();   
-        
-        if($deleteVehicle) {
-            Session::flash('successDeleteVehicle','Data berhasil dihapus');
-            return redirect('manage-vehicles');
+        $vehicleActive = Driver::where('vehicle_id', $vehicle_id)->first();
+
+        if ($deleteVehicle) {
+            if ($vehicleActive) {
+                Session::flash('failDeleteVehicle', 'Data gagal dihapus karena kendaraan masih digunakan oleh driver');
+                return redirect('manage-vehicles');
+            } else {
+                $deleteVehicle->delete();
+                Session::flash('successDeleteVehicle', 'Data kendaraan berhasil dihapus');
+                return redirect('manage-vehicles');
+            }
         } else {
-            Session::flash('failDeleteVehicle','Data gagal dihapus');
+            Session::flash('failDeleteVehicle', 'Data kendaraan tidak ditemukan');
             return redirect('manage-vehicles');
+        }
+        
+    }
+
+    public function getManageOrder()
+    {
+        $data_order = Order::all();
+        return view('admin.manage-order', compact('data_order'));
+    }
+
+    public function detailOrder($schedule_id)
+    {
+        $updateOrder = Order::find($schedule_id);
+
+        return view('admin.update-order', compact('updateOrder'));
+    }
+
+    public function submitUpdateOrder(Request $request, $schedule_id)
+    {
+        $updateOrder = Order::find($schedule_id);
+        $updateOrder->status = $request->input('status');
+
+        $updateOrder->save();
+
+        if($updateOrder) {
+            Session::flash('status','Data Order Berhasil Ditambahkan');
+            return redirect('manage-order');
+        } else {
+            Session::flash('notSetDataMessage', 'Data Order Gagal Ditambahkan');
+            return view('admin.update-order');
         }
     }
 
+    
+    public function getManageDriver()
+    {
+        $data_driver = Driver::all();
+        return view('admin.manage-driver', compact('data_driver'));
+    }
+
+    public function getAddDriver()
+    {
+        $data_vehicle = Vehicle::where('status_vehicle', 'Sudah Baik')->get();
+        return view('admin.add-driver', compact('data_vehicle'));
+    }
+
+    public function submitAddDriver(Request $request)
+    {
+        $request->validate([
+            'name_driver' => 'required',
+            'phoneNo_driver' => 'required',
+            'license_number' => 'required',
+            'image_driver' => 'required',
+            'vehicle_id' => 'required',
+        ]);
+
+        $driver_image_path = $request->file('image_driver')->store('driver-image', 'public');
+
+        $createAddDriver = Driver::create([
+            'name_driver' => $request->input('name_driver'),
+            'phoneNo_driver'=> $request->input('phoneNo_driver'),
+            'license_number' => $request->input('license_number'),
+            'image_driver' => $driver_image_path,
+            'vehicle_id' => $request->input('vehicle_id'),
+        ]);
+
+        if($createAddDriver) {
+            Session::flash('status','Data Driver Berhasil Ditambahkan');
+            return redirect('add-driver');
+        } else { 
+            Session::flash('notSetDataMessage', 'Data Driver Gagal Ditambahkan');
+            return redirect('add-driver');
+        }
+    }
+
+    public function deleteDriver($driver_id)
+    {
+        $deleteDriver = Driver::find($driver_id);        
+        $deleteDriver->delete();
+        
+        if($deleteDriver) {
+            Session::flash('successDeleteDriver','Data berhasil dihapus');
+            return redirect('manage-driver');
+        } else {
+            Session::flash('failDeleteDriver','Data gagal dihapus');
+            return redirect('manage-driver');
+        }
+    }
+
+    public function getEditDriver($driver_id)
+    {
+        $editDriver = Driver::find($driver_id);
+        return view('admin.edit-driver', compact('editDriver'));
+    }
+
+    public function submitEditDriver(Request $request, $driver_id)
+    {
+        $editDriver = Driver::find($driver_id);
+
+        $editDriver->name_driver = $request->input('name_driver');
+        $editDriver->phoneNo_driver = $request->input('phoneNo_driver');
+        $editDriver->license_number = $request->input('license_number');
+
+        if ($request->hasFile('image_driver')) {
+            if ($editDriver->image_driver && \Storage::disk('public')->exists($editDriver->image_driver)) {
+                \Storage::disk('public')->delete($editDriver->image_driver);
+            }
+
+            $driver_image_path = $request->file('image_driver')->store('driver-image', 'public');
+            $editDriver->image_driver = $driver_image_path;
+        }
+
+        $editDriver->vehicle_id = $request->input('vehicle_id');
+        $editDriver->save();
+        
+        if($editDriver) {
+            Session::flash('successEditDriver','Data berhasil diubah');
+            return redirect('manage-driver');
+        } else {
+            Session::flash('failDeleteDriver','Data gagal diubah');
+            return redirect('manage-driver');
+        }
+    }
+
+    public function getArticle()
+    {
+        $data_article = Article::all();
+        return view('admin.manage-article', compact('data_article'));
+    }
+
+    public function show_detail_article(Request $request) {
+        $article = Article::find($request->article_id);
+
+        return view('admin.detail-article', [
+            'article' => $article
+        ]);
+    }
+
+    public function getAddArticle()
+    {
+        return view('admin.add-article');
+    }
+
+    public function submitAddArticle(Request $request)
+    {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'image_article' => 'required',
+        ]);
+
+        $article_image_path = $request->file('image_article')->store('article-image', 'public');
+
+        $createAddArticle = Article::create([
+            'title' => $request->input('title'),
+            'content'=> $request->input('content'),
+            'image_article' => $article_image_path,
+        ]);
+
+        if($createAddArticle) {
+            Session::flash('status','Data Article Berhasil Ditambahkan');
+            return redirect('add-article');
+        } else {
+            Session::flash('notSetDataMessage', 'Data Article Gagal Ditambahkan');
+            return redirect('add-article');
+        }
+    }
+
+    public function destroy_article(Request $request) {
+        $article = Article::find($request->article_id);
+
+        $article->delete();
+
+        Session::flash('success-to-delete-article', 'Data Arttkel' . $article->title . ' Berhasil Dihapus');
+        return redirect(url('manage-article'));
+    }
+
+    
 }

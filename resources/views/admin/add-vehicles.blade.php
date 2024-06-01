@@ -19,6 +19,19 @@
                         <div class="card-body">
                         <h5 class="card-title">Tambah Kendaraan</h5>
                         <hr>
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                        </div>
+                        @endif
+                        @if(Session::has('status'))
+                            <div class="alert alert-success bg-success text-light border-0 alert-dismissible fade show" role="alert">
+                                {{ Session::get('status') }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
 
                         <!-- Add Vehicle Form Elements -->
                         <form method="post">
@@ -57,23 +70,11 @@
                                 </div>
                             </div>
                             <div class="text-end">
-                                <button type="submit" class="btn-custom px-5"> SUBMIT</button>
+                                <a href="{{ url('/manage-vehicles') }}" class="btn-back px-5">KEMBALI</a>
+                                <button type="submit" class="btn-custom px-5">SUBMIT</button>
                             </div>
                         </form>
                     </div>
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <p>{{ $error }}</p>
-                        @endforeach
-                    </div>
-                    @endif
-                    @if(Session::has('status'))
-                        <div class="alert alert-success"> {{ Session::get('status') }}</div>
-                    @endif
-                    @if(Session::has('notSetDataMessage'))
-                        <div class="alert alert-success"> {{ Session::get('notSetDataMessage') }}</div>
-                    @endif
                     </div>
                 </div>
             </div>
