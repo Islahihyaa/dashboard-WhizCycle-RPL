@@ -3,7 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Complaint;
+use App\Models\Order;
+use App\Models\Driver;
+use App\Models\User;
+
+
 use Session;
 
 class AdminController extends Controller
@@ -45,6 +53,7 @@ class AdminController extends Controller
 
     }
 
+<<<<<<< HEAD
     public function getArticle()
     {
         $data_article = Article::all();
@@ -115,4 +124,34 @@ class AdminController extends Controller
         $item->save();
         return redirect('articleupp/')->with('success', 'Data updated successfully');
     }
+=======
+    public function getManageOrder()
+    {
+        $data_order = Order::all();
+        return view('admin.manage-order', compact('data_order'));
+    }
+
+    public function detailOrder($schedule_id)
+    {
+        $updateOrder = Order::find($schedule_id);
+
+        return view('admin.update-order', compact('updateOrder'));
+    }
+
+    public function submitUpdateOrder(Request $request, $schedule_id)
+    {
+        $updateOrder = Order::find($schedule_id);
+        $updateOrder->status = $request->input('status');
+
+        $updateOrder->save();
+
+        if($updateOrder) {
+            Session::flash('status','Data Order Berhasil Ditambahkan');
+            return redirect('manage-order');
+        } else {
+            Session::flash('notSetDataMessage', 'Data Order Gagal Ditambahkan');
+            return view('admin.update-order');
+        }
+    }
+>>>>>>> a60a254d919b60902d63b4493dc30ca8b3277eac
 }

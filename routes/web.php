@@ -8,6 +8,7 @@ use App\Http\Controllers\schedulepickupController;
 use App\Http\Middleware\AuthenticatingMiddleware;
 
 
+
 //* Authentication
 Route::middleware(AuthenticatingMiddleware::class)->group(function () {
     Route::get('/', [AuthController::class, 'login']);
@@ -39,13 +40,13 @@ Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
 
 //* End Redeems Points
 
-//* Customer Sercice 
+//* Customer Sercice
 Route::get('customer-service', [UserController::class, 'getCustomerService']);
 Route::post('customer-service', [UserController::class, 'submitComplaint']);
 Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
 Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
 
-//* End Customer Sercice 
+//* End Customer Sercice
 
 
 /*--------------------------------------------------------------
@@ -53,3 +54,29 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 --------------------------------------------------------------*/
 
 Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
+
+//Storan Sampah
+Route::get('manage-order', [AdminController::class, 'getManageOrder']);
+Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
+Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
+
+//End Setoran Sampah
+
+//* Kelola Artikel
+Route::get('/manage-article', [AdminController::class, 'getArticle']);
+// Route::put('/manage-article/{article_id}', [AdminController::class, ])->name('edit-article.update');
+
+Route::get('add-article', [AdminController::class, 'getAddArticle']);
+
+Route::post('add-article', [AdminController::class, 'submitAddArticle']);
+
+Route::get('article/{article_id}/detail', [AdminController::class, 'show_detail_article']);
+
+Route::delete('remove-article/{article_id}', [AdminController::class, 'destroy_article']);
+
+Route::get('articleup/{article_id}', [AdminController::class, 'editArticle'])->name('edit-article');
+Route::put('articleupp/{article_id}', [AdminController::class, 'updateartikel'])->name('update-article');
+
+//* End Kelola Artikel
+
+
