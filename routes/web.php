@@ -85,9 +85,19 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 --------------------------------------------------------------*/
 
 //* Kelola Kendaraan
-Route::get('manage-vehicles', [AdminController::class, 'getManageVehicle']);
+Route::get('manage-vehicles', [AdminController::class, 'getManageVehicle'])->name('manage-vehicles');
 Route::put('manage-vehicles/{vehicle_id}', [AdminController::class, 'updateStatusVehicle'])->name('status-vehicle.update');
-Route::get('add-vehicles', [AdminController::class, 'getAddVehicle']);
+Route::get('add-vehicles', [AdminController::class, 'getAddVehicle'])->name('add-vehicles');
 Route::post('add-vehicles', [AdminController::class, 'submitAddVehicle']);
 Route::get('manage-vehicles/{vehicle_id}', [AdminController::class, 'deleteVehicle'])->name('data-vehicle.delete');
 //* End Kelola Kendaraan
+
+// Laporan Routes
+Route::get('/laporan', [AdminController::class, 'getLaporan'])->name('laporan');
+Route::get('/get-table/{tableId}', [AdminController::class, 'getTable'])->name('getTable');
+
+
+Route::get('/data-vehicles', [AdminController::class, 'getTableVehicle'])->name('data-vehicles');
+Route::get('/data-cs', [AdminController::class, 'getTableCS'])->name('data-cs');
+Route::get('/data-point', [AdminController::class, 'getTablePoint'])->name('data-point');
+Route::get('/data-user', [AdminController::class, 'getTableUser'])->name('data-user');

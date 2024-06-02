@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Driver;
+use App\Models\Report;
+use App\Models\article;
+use App\Models\Vehicle;
 use App\Models\Complaint;
 use App\Models\RedeemPoint;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Role; // Import the Role model
-use App\Models\article;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Driver;
-use App\Models\Vehicle;
-use Session;
+use App\Models\Role; // Import the Role model
 
 class AdminController extends Controller
 {
@@ -251,5 +253,52 @@ class AdminController extends Controller
 
         return redirect()->route('admin.article.index')->with('success', 'Artikel edukasi lingkungan berhasil dibuat!');
     }
+
+    public function getLaporan()
+    {
+        $dataVehicle = Vehicle::all();
+        return view('admin.laporan', compact('dataVehicle'));
+    }
+
+    public function getTable($tableId)
+    {
+        if ($tableId === 'redeemPointHistoryTable') {
+            $history = RedeemPoint::all();
+            return view('admin.redeem-point-table', ['history' => $history]);
+        } elseif ($tableId === 'userManagementTable') {
+            $users = User::all();
+            return view('admin.manageusertable', ['users' => $users]);
+        }
+        return view('table-not-found');
+    }
+    // Add other necessary methods here
+    
+
+    public function getTableVehicle()
+    {
+        $dataVehicle = Vehicle::all();
+        return view('admin.laporan-vehicle', compact('dataVehicle'));
+    }
+
+    public function getTablePoint()
+    {
+        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
+        ->leftJoin('user','user.user_id','=','redeem_points.user_id')
+        ->get();
+        return view('admin.laporan-point', $data);
+    }
+
+    public function getTableCS()
+    {
+        $complaintdata = Complaint::all();
+        return view('admin.laporan-cs', compact('complaintdata'));
+    }
+
+    public function getTableUser()
+    {
+        $users = User::all(); // Fetch all users from the database
+        return view('admin.laporan-manageuser', ['users' => $users]);
+    }
+
 }
 

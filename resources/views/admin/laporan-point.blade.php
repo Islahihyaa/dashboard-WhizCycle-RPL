@@ -1,20 +1,22 @@
 @extends('admin-layout')
 
-@section('title', 'WhizCycle | Redeem Point History')
+@section('title', 'WhizCycle | Laporan')
 
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>Redeem Point History</h1>
+        <h1>Laporan</h1>
     </div>
     <section class="section">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Redeem Point History</h5>
+                        <h5 class="card-title">Reports</h5>
                         <hr>
                         <div class="col">
+                            <!-- Export Button -->
+                            <button id="exportButton" class="btn btn-success mb-3">Export to XLSX</button>
                             <table class="table" id="redeemPointTable">
                                 <thead class="table-light">
                                     <tr>
@@ -45,8 +47,18 @@
         </div>
     </section>
 </main>
-@endsection
 
-@section("js")
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7Bp6LW2HLhtM5x5o0s8JwE6rA0X7yCZjlf8" crossorigin="anonymous"></script>
+<!-- Include SheetJS Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<!-- Export to XLSX Script -->
+<script>
+    document.getElementById('exportButton').addEventListener('click', function() {
+        // Extract table data
+        var table = document.getElementById('redeemPointTable');
+        var wb = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
+        
+        // Export to XLSX
+        XLSX.writeFile(wb, 'point_history_report.xlsx');
+    });
+</script>
 @endsection
