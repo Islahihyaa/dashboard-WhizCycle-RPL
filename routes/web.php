@@ -73,8 +73,6 @@ Route::get('history', [schedulepickupController::class, 'getHistory']);
 //* End History
 
 
-//* End Redeems Points
-
 //* Customer Sercice
 Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
 Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
@@ -85,9 +83,11 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 /*--------------------------------------------------------------
 # Admin
 --------------------------------------------------------------*/
-//Storan Sampah
-Route::get('manage-order', [AdminController::class, 'getManageOrder']);
-Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
-Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
 
-//End Setoran Sampah
+//* Kelola Kendaraan
+Route::get('manage-vehicles', [AdminController::class, 'getManageVehicle']);
+Route::put('manage-vehicles/{vehicle_id}', [AdminController::class, 'updateStatusVehicle'])->name('status-vehicle.update');
+Route::get('add-vehicles', [AdminController::class, 'getAddVehicle']);
+Route::post('add-vehicles', [AdminController::class, 'submitAddVehicle']);
+Route::get('manage-vehicles/{vehicle_id}', [AdminController::class, 'deleteVehicle'])->name('data-vehicle.delete');
+//* End Kelola Kendaraan

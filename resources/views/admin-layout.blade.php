@@ -106,14 +106,14 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="dashboard" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('dashboard')" href="{{url('/dashboard')}}">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('/manage-order')}}">
+        <a class="nav-link @yield('manage-order')" href="{{url('/manage-order')}}">
           <i class="bi bi-truck"></i>
           <span>Setoran Sampah</span>
         </a>
@@ -127,14 +127,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link @yield('manage-article')" href="{{url('/manage-article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="response-complaint">
+        <a class="nav-link @yield('response-complaint')" href="{{url('/response-complaint')}}">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>
@@ -146,6 +146,19 @@
               <span>Management User</span>
           </a>
       </li>
+        <a class="nav-link @yield('manage-vehicles')" href="{{url('/manage-vehicles')}}">
+          <i class="bi bi-truck"></i>
+          <span>Kelola Kendaraan</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link @yield('manage-driver')" href="{{url('/manage-driver')}}">
+          <i class="bi bi-person-walking"></i>
+          <span>Kelola Driver</span>
+        </a>
+      </li>
+    </ul>
 
   </aside><!-- End Sidebar-->
 

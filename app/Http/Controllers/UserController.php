@@ -130,7 +130,7 @@ class UserController extends Controller
             Session::flash('status','Tiket Berhasil Dikirimkan');
             return redirect('customer-service');
         }
-    }    
+    }        
 }
 
 //     public function delete($id)

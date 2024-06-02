@@ -107,14 +107,14 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="home" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('home')" href="{{url('/')}}">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="order" data-bs-target="#collapseOrder">
+        <a class="nav-link @yield('order')" href="{{url('/order')}}">
           <i class="bi bi-truck"></i>
           <span>Setoran Sampah</span>
         </a>
@@ -122,7 +122,7 @@
 
       @if(Auth::user()->role_id == 2)
       <li class="nav-item">
-        <a class="nav-link collapsed" href="history">
+        <a class="nav-link @yield('riwayat')" href="{{url('/riwayat')}}">
           <i class="bi bi-clock-history"></i>
           <span>Riwayat</span>
         </a>
@@ -137,14 +137,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+        <a class="nav-link @yield('article')" href="{{url('article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="customer-service">
+        <a class="nav-link @yield('customer-service')" href="{{url('customer-service')}}">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>
