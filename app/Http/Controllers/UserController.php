@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RedeemPoint;
 use App\Models\Complaint;
+use App\Models\Voucher;
+
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -29,6 +31,8 @@ class UserController extends Controller
                             ->leftJoin('user','user.user_id','=','redeem_points.user_id')
                             ->where('user.user_id',auth()->user()->user_id)
                             ->get();
+        $data['vouchers'] = Voucher::all(); // Ambil semua voucher dari database
+
         return view('customer.reedem-point',$data);
     }
 
@@ -51,6 +55,11 @@ class UserController extends Controller
 
             return response()->json(["status"=>500]);
         }
+    }
+    public function getVouchers()
+    {
+        $vouchers = Voucher::all(); // Ambil semua voucher dari database
+        return response()->json($vouchers);
     }
     
     public function submitOrder(Request $request)
@@ -97,21 +106,6 @@ class UserController extends Controller
         }
     }
 
-    public function getHistory()
-    {
-        $data_order = Order::all();
-        return view('historyschedulepickup.index', ['data_order' => $data_order]);
-    }
-    
-    public function deleteHistory($id)
-    {
-        $order = Order::findOrFail($id);
-        $order->delete();
-        return redirect()->route('history')->with('success', 'Data history berhasil dihapus');
-    }
-
-    
-
     public function getRedeemspoints()
     {
         return view('customer.redeempoint1');
@@ -146,23 +140,6 @@ class UserController extends Controller
             return redirect('customer-service');
         }
     }
-    
-    public function destroy($id)
-    {
-        // Cari mobil berdasarkan ID
-        $order = Order::find($id);
-    
-        // Pastikan mobil ditemukan
-        if (!$order) {
-            return redirect()->back()->with('error', 'order tidak ditemukan.');
-        }
-    
-        // Hapus mobil
-        $order->delete();
-    
-        // Redirect kembali ke halaman sebelumnya dengan pesan sukses
-        return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
-    }   
     
 }
 

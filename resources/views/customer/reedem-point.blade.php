@@ -38,19 +38,16 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <?php 
-                        $arr = [50000,100000,200000,300000];
-                    ?>
                     <div class="row">
-                        @foreach($arr as $v)
-                        <div class="col-md-6" style="position: relative;margin-top:10px;" onclick="openModal({{ $v }})" data-value="{{ $v }}">
+                        @foreach($vouchers as $v)
+                        <div class="col-md-6" style="position: relative;margin-top:10px;" onclick="openModal({{ $v->id }}, '{{ $v->voucher }}', {{ $v->point }})"  data-value="{{ $v->id }}">
                             <img src="{{ url('assets/img/voucher-bg.png') }}" style="width: 100%; z-index: -1;">
                             <div style="position: absolute; top: 50%; left: 35%; transform: translate(-50%, -50%); color: white; font-size: 28px;">
-                                <p style="color:red;font-size:28px;margin-top:50px;">- MATAHARI </p>
-                                <p style="margin-top:-20px;">Voucher Rp. <?= number_format($v) ?> Matahari.com</p>
+                                <p style="color:red;font-size:28px;margin-top:50px;">- VOUCHER </p>
+                                <p style="margin-top:-20px;"><?= $v->voucher ?></p>
                             </div>
                             <div style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
-                                <p style="margin-top:20px;">Pass <?= number_format($v/100) ?> Points</p>
+                                <p style="margin-top:20px;">Pass <?= number_format($v->point) ?> Points</p>
                             </div>
                         </div>
                         @endforeach
@@ -76,11 +73,11 @@
                                         <div class="col-md-6" style="position: relative;margin-top:10px;">
                                             <img src="{{ url('assets/img/voucher-bg.png') }}" style="width: 100%; z-index: -1;">
                                             <div style="position: absolute; top: 50%; left: 35%; transform: translate(-50%, -50%); color: white; font-size: 28px;">
-                                                <p style="color:red;font-size:28px;margin-top:50px;">- MATAHARI </p>
-                                                <p style="margin-top:-20px;" id="vc-nominal">Voucher Rp. <?= number_format($v) ?> Matahari.com</p>
+                                                <p style="color:red;font-size:28px;margin-top:50px;">- VOUCHER </p>
+                                                <p style="margin-top:-20px;" id="vc-nominal"><?= $v->voucher ?></p>
                                             </div>
                                             <div style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
-                                                <p style="margin-top:20px;" id="vc-pass">Pass <?= number_format($v/100) ?> Points</p>
+                                                <p style="margin-top:20px;" id="vc-pass">Pass <?= number_format($v->point) ?> Points</p>
                                             </div>
                                            
                                         </div>
@@ -295,22 +292,21 @@
         // Attach click event listener to the download icon
         document.getElementById('download-icon').addEventListener('click', downloadScreenshot);
 
-    function openModal(value) {
+        function openModal(id, voucher, point) {
         // alert(value);
         var mypoint = $("#mypoint").val();
-        if (mypoint >= value/100) {
+        if (mypoint >= point) {
             $("#confirm-redeem").css("display","block");
             $("#content-modal").html("Apakah kamu yakin akan melakukan penukaran point dengan voucher ini?");
         }else{
             $("#confirm-redeem").css("display","none");
             $("#content-modal").html("Maaf point kamu tidak cukup :(");
         }
-        $("#point-pass").val(value/100);
-        $("#vc-nominal").html("Voucher Rp. "+numeral(value).format('0,0')+" Matahari.com");
-        $("#vc-pass").html("Pass "+numeral(value/100).format('0,0')+" Points");
-        $("#minus-point").html("-"+numeral(value/100).format('0,0')+" Points");
+        $("#point-pass").val(point);
+        $("#vc-nominal").html(voucher);
+        $("#vc-pass").html("Pass "+numeral(point).format('0,0')+" Points");
+        $("#minus-point").html("-"+numeral(point).format('0,0')+" Points");
         $("#reedemModal").modal("show");   
-
     }
     function closeModal() {
         $("#reedemModal").modal("hide");
