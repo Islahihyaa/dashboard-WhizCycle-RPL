@@ -58,15 +58,19 @@
         </div>
     </section>
 </main>
-@endsection
 
-@section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-EvoztQwjcMpfM/lX7OgQmJQ4k3HnH1J8Gn9BY/ArqyrO9R8/4fbLQvdXc1ClxriHwTTmAOKwlsKiTFsYneEayg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Include SheetJS Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<!-- Export to XLSX Script -->
 <script>
     document.getElementById('exportButton').addEventListener('click', function() {
-        var wb = XLSX.utils.table_to_book(document.getElementById('manageVehiclesTable'), {sheet: "Sheet JS"});
-        XLSX.writeFile(wb, 'manageVehicles.xlsx');
+        // Extract table data
+        var table = document.getElementById('manageVehiclesTable');
+        var wb = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
+        
+        // Export to XLSX
+        XLSX.writeFile(wb, 'manage_vehicles.xlsx');
     });
 </script>
 @endsection

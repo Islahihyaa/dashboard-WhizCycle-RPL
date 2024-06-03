@@ -10,6 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Middleware\AuthenticatingMiddleware;
 use App\Http\Controllers\schedulepickupController;
 
+//* Authentication
 Route::middleware(AuthenticatingMiddleware::class)->group(function () {
     Route::get('/', [AuthController::class, 'login']);
     Route::post('/', [AuthController::class, 'authenticating']);
@@ -133,3 +134,23 @@ Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteCo
 /*--------------------------------------------------------------
 # Admin
 --------------------------------------------------------------*/
+//End Setoran Sampah
+
+//* Kelola Artikel
+Route::get('/manage-article', [AdminController::class, 'getArticle']);
+// Route::put('/manage-article/{article_id}', [AdminController::class, ])->name('edit-article.update');
+
+Route::get('add-article', [AdminController::class, 'getAddArticle']);
+
+Route::post('add-article', [AdminController::class, 'submitAddArticle']);
+
+Route::get('article/{article_id}/detail', [AdminController::class, 'show_detail_article']);
+
+Route::delete('remove-article/{article_id}', [AdminController::class, 'destroy_article']);
+
+Route::get('articleup/{article_id}', [AdminController::class, 'editArticle'])->name('edit-article');
+Route::put('articleupp/{article_id}', [AdminController::class, 'updateartikel'])->name('update-article');
+
+//* End Kelola Artikel
+
+

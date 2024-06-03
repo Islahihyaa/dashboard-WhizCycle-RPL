@@ -120,7 +120,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('manage-article')" href="{{url('/article')}}">
+        <a class="nav-link @yield('manage-article')" href="{{url('/manage-article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
