@@ -433,7 +433,7 @@ class AdminController extends Controller
     {
         return view('admin.add-article');
     }
-
+    
     public function submitAddArticle(Request $request)
     {
         $request->validate([
@@ -441,15 +441,15 @@ class AdminController extends Controller
             'content' => 'required',
             'image_article' => 'required',
         ]);
-
+    
         $article_image_path = $request->file('image_article')->store('article-image', 'public');
-
+    
         $createAddArticle = Article::create([
             'title' => $request->input('title'),
             'content'=> $request->input('content'),
             'image_article' => $article_image_path,
         ]);
-
+    
         if($createAddArticle) {
             Session::flash('status','Data Article Berhasil Ditambahkan');
             return redirect('add-article');
