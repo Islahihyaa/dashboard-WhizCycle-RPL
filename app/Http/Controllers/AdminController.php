@@ -25,7 +25,14 @@ class AdminController extends Controller
 {
     public function getDashboard()
     {
-        return view('admin.dashboard');
+        $total_user = User::count();
+        $recyle_total = DB::table('user')->sum('total_daur_ulang');
+        $data_article = Article::all();
+        return view('admin.dashboard', [
+            'total_user' => $total_user,
+            'recyle_total' => $recyle_total,
+            'data_article' => $data_article,
+        ]);
     }
 
     public function getManageUser()
@@ -462,5 +469,22 @@ class AdminController extends Controller
     }
 
     
+    public function editArticle(Request $request)
+    {
+        $article = Article::find($request->article_id);
+
+        return view('admin.update-article', compact('article'));
+    }
+    public function updateartikel(Request $request)
+    {
+        $article = Article::find($request->article_id);
+        $article->title = $request->input('title');
+        $article->content = $request->input('content');
+        $article->image_article = $request->input('image_article');
+
+
+        $item->save();
+        return redirect('articleupp/')->with('success', 'Data updated successfully');
+    }
 }
 
