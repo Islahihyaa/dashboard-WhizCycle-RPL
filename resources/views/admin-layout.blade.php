@@ -43,7 +43,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-      <img src="images/logo.png" alt="logo" width="180" height="60" >
+    <img src="{{ asset('images/logo.png') }}" alt="logo" width="180" height="60" >
   </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -113,14 +113,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link <?= request()->segment(1) != "history-all-redeem-point" ?  "collapsed" :"" ?>" href="<?= url('history-all-redeem-point') ?>">
+        <a class="nav-link @yield('redeem-point-history')" href="<?= url('history-all-redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Riwayat Tukar Point </span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('article')" href="{{url('article')}}">
+        <a class="nav-link @yield('manage-article')" href="{{url('/article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
@@ -134,7 +134,7 @@
       </li>
 
       <li class="nav-item">
-          <a class="nav-link collapsed" href="manageuser">
+          <a class="nav-link @yield('manageuser')" href="manageuser">
               <i class="bi bi-person-circle"></i>
               <span>Management User</span>
           </a>
@@ -160,9 +160,9 @@
               <span>Laporan</span>
           </a>
       </li>
+      
 
-
-    
+      </li>
     </ul>
 
   </aside><!-- End Sidebar-->

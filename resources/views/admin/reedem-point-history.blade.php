@@ -2,7 +2,10 @@
 
 @section('title', 'WhizCycle | Redeem Point History')
 
+@section('redeem-point-history', 'active')
+
 @section('content')
+
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>Redeem Point History</h1>

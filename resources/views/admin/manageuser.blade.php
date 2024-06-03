@@ -2,7 +2,108 @@
 
 @section('title', 'WhizCycle | User Management')
 
+@section('manageuser', 'active')
+
 @section('content')
+
+<style>
+    .main {
+        padding: 20px;
+        background-color: #f4f7fa;
+    }
+
+    .pagetitle h1 {
+        color: #333;
+        font-size: 24px;
+    }
+
+    .search-bar {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .search-bar input[type="text"], .search-bar select {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .btn-primary, .btn-sort {
+        background-color: #0d6efd;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .table th, .table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        cursor: pointer; /* Make headers clickable */
+    }
+
+    .table th {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .table td {
+        vertical-align: middle;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 5px 10px;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-edit {
+        background-color: #0d6efd;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+    }
+
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination .page-item {
+        margin: 0 5px;
+    }
+
+    .pagination .page-link {
+        color: #0d6efd;
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: #fff;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+        color: #fff;
+    }
+</style>
+
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>User Management</h1>

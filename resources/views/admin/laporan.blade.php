@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle | Laporan')
 
+@section('laporan', 'active')
+
 @section('content')
 <main id="main" class="main">
     <div class="pagetitle">
@@ -26,12 +28,14 @@
                             <div class="col-md-3 col-sm-6 mb-3">
                                 <a href="{{ url('/data-vehicles') }}" class="btn-custom d-block"><i class="bi bi-plus-circle"></i><span class="m-2">Data Kendaraan</span></a>
                             </div>
+                            <div class="col-md-3 col-sm-6 mb-3">
+                                <a href="{{ url('/data-driver') }}" class="btn-custom d-block"><i class="bi bi-plus-circle"></i><span class="m-2">Data Driver</span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
     </section>
 </main>
 @endsection

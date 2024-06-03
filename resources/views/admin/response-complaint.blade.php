@@ -1,6 +1,6 @@
 @extends('admin-layout')
 
-@section('title', 'WhizCycle | Pesanan')
+@section('title', 'WhizCycle | Response Complaint')
 
 @section('response-complaint', 'active')
 
