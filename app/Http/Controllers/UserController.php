@@ -14,10 +14,13 @@ class UserController extends Controller
 {
     public function getHome()
     {
-        // dd(Auth::user());
-        return view('customer.index');
+        $user_data = Auth::user();
+        $data_article = Article::all();
+        return view('customer.index', [
+            'user_data' =>  $user_data,
+            'data_article' => $data_article,
+        ]);
     }
-
     public function createOrder()
     {
         return view('customer.order');
