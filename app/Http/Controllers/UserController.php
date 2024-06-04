@@ -47,8 +47,8 @@ class UserController extends Controller
             $point->user_id = auth()->user()->user_id;
             $point->created_at = date('Y-m-d H:i:s');
             $point->save();
-            
-            
+
+
             $user = User::find(auth()->user()->user_id);
             $user->total_points = $user->total_points - $request->point;
             $user->save();
@@ -59,9 +59,9 @@ class UserController extends Controller
             return response()->json(["status"=>500]);
         }
     }
-    
+
     public function submitOrder(Request $request)
-    {       
+    {
         $request->validate([
             'name' => 'required',
             'phoneNo' => 'required',
@@ -115,7 +115,7 @@ class UserController extends Controller
     }
 
     public function submitComplaint(Request $request)
-    {       
+    {
         $request->validate([
             'name' => 'required',
             'phoneNo' => 'required',
@@ -137,7 +137,21 @@ class UserController extends Controller
             Session::flash('status','Tiket Berhasil Dikirimkan');
             return redirect('customer-service');
         }
-    }        
+    }
+
+    public function getArticle()
+    {
+        $data_article = Article::all();
+        return view('customer.show-article', compact('data_article'));
+    }
+
+    public function getDetailArticle(Request $request)
+    {
+        $data_article = Article::find($request->article_id);
+        return view('customer.detail-article', [
+            'article' => $data_article
+        ]);
+    }
 }
 
 //     public function delete($id)
