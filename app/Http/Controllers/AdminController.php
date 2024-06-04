@@ -45,13 +45,13 @@ class AdminController extends Controller
         $users = User::all(); // Fetch all users from the database
         return view('admin.manageuser', ['users' => $users]);
     }
-    
+
     public function edit(User $user)
     {
         return view('admin.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user) 
+    public function update(Request $request, User $user)
 {
     // Validate the incoming request data
     $request->validate([
@@ -83,7 +83,7 @@ class AdminController extends Controller
         $deleteComplaint = Complaint::find($complaint_id);
 
         $deleteComplaint->delete();
-        
+
         if($deleteComplaint) {
             Session::flash('deleteComplaint','Data Deleted Succesfully');
             return redirect('response-complaint');
@@ -116,7 +116,7 @@ class AdminController extends Controller
     }
 
     public function submitAddVehicle(Request $request)
-    {       
+    {
         $request->validate([
             'name_vehicle' => 'required|min:5|max:20',
             'category_vehicle' => 'required',
@@ -135,7 +135,7 @@ class AdminController extends Controller
         if($createAddVehicle) {
             Session::flash('status','Data Kendaraan Berhasil Ditambahkan');
             return redirect('add-vehicles');
-        } else { 
+        } else {
             Session::flash('notSetDataMessage', 'Data Kendaaraan Gagal Ditambahkan');
             return redirect('add-vehicles');
         }
@@ -170,7 +170,7 @@ class AdminController extends Controller
             Session::flash('failDeleteVehicle', 'Data kendaraan tidak ditemukan');
             return redirect('manage-vehicles');
         }
-        
+
     }
 
     public function getManageOrder()
@@ -215,7 +215,7 @@ class AdminController extends Controller
         $data_order = Order::all();
         return view('historyschedulepickup.index', ['data_order' => $data_order]);
     }
-    
+
     public function deleteHistory(Request $request, $id)
     {
         error_log($request->id);
@@ -228,21 +228,21 @@ class AdminController extends Controller
     {
         // Cari mobil berdasarkan ID
         $order = Order::find($id);
-    
+
         // Pastikan mobil ditemukan
         if (!$order) {
             return redirect()->back()->with('error', 'order tidak ditemukan.');
         }
-    
+
         // Hapus mobil
         $order->delete();
-    
+
         // Redirect kembali ke halaman sebelumnya dengan pesan sukses
         return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
-    }   
+    }
 
-    
-    // public function dataComplaint() 
+
+    // public function dataComplaint()
     // {
     //     $complaintdata = Complaint::all();
     //     return view('admin.response-complaint', compact('laboratoriums'));
@@ -291,7 +291,7 @@ class AdminController extends Controller
         return view('table-not-found');
     }
     // Add other necessary methods here
-    
+
 
     public function getTableVehicle()
     {
@@ -360,7 +360,7 @@ class AdminController extends Controller
         if($createAddDriver) {
             Session::flash('status','Data Driver Berhasil Ditambahkan');
             return redirect('add-driver');
-        } else { 
+        } else {
             Session::flash('notSetDataMessage', 'Data Driver Gagal Ditambahkan');
             return redirect('add-driver');
         }
@@ -368,9 +368,9 @@ class AdminController extends Controller
 
     public function deleteDriver($driver_id)
     {
-        $deleteDriver = Driver::find($driver_id);        
+        $deleteDriver = Driver::find($driver_id);
         $deleteDriver->delete();
-        
+
         if($deleteDriver) {
             Session::flash('successDeleteDriver','Data berhasil dihapus');
             return redirect('manage-driver');
@@ -405,7 +405,7 @@ class AdminController extends Controller
 
         $editDriver->vehicle_id = $request->input('vehicle_id');
         $editDriver->save();
-        
+
         if($editDriver) {
             Session::flash('successEditDriver','Data berhasil diubah');
             return redirect('manage-driver');
@@ -433,7 +433,7 @@ class AdminController extends Controller
     {
         return view('admin.add-article');
     }
-    
+
     public function submitAddArticle(Request $request)
     {
         $request->validate([
@@ -441,15 +441,15 @@ class AdminController extends Controller
             'content' => 'required',
             'image_article' => 'required',
         ]);
-    
+
         $article_image_path = $request->file('image_article')->store('article-image', 'public');
-    
+
         $createAddArticle = Article::create([
             'title' => $request->input('title'),
             'content'=> $request->input('content'),
             'image_article' => $article_image_path,
         ]);
-    
+
         if($createAddArticle) {
             Session::flash('status','Data Article Berhasil Ditambahkan');
             return redirect('add-article');
@@ -468,23 +468,35 @@ class AdminController extends Controller
         return redirect(url('manage-article'));
     }
 
-    
     public function editArticle(Request $request)
     {
         $article = Article::find($request->article_id);
 
         return view('admin.update-article', compact('article'));
     }
-    public function updateartikel(Request $request)
+
+    public function updateartikel(Request $request, $article_id)
     {
-        $article = Article::find($request->article_id);
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-        $article->image_article = $request->input('image_article');
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'image_article' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
 
+    $article = Article::find($article_id);
+    $article->title = $request->input('title');
+    $article->content = $request->input('content');
 
-        $item->save();
-        return redirect('articleupp/')->with('success', 'Data updated successfully');
+    if ($request->hasFile('image_article')) {
+        $image = $request->file('image_article');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+        $article->image_article = 'images/' . $imageName;
+    }
+
+    $article->save();
+
+    return redirect()->route('edit-article', ['article_id' => $article_id])->with('success', 'Data updated successfully');
     }
 }
 
