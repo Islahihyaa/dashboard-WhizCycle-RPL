@@ -1,6 +1,8 @@
 @extends('admin-layout')
 
-@section('title', 'WhizCycle | Pesanan')
+@section('title', 'WhizCycle | Response Complaint')
+
+@section('response-complaint', 'active')
 
 @section('content')
 
@@ -30,13 +32,13 @@
                                     <th>Nama User</th>
                                     <th>Subjek</th>
                                     <th>Deskripsi</th>
-                                    <th>Tanggal</th>
+                                    <th data-type="date" data-format="YYYY/DD/MM">Tanggal</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($complaintdata as $data)
+                                @foreach ($complaintdata as $data)                            
                                     <tr>
                                         <td scope="row">{{ $data -> complaint_id }}</td>
                                         <td scope="row">{{ $data -> user -> name}}</td>

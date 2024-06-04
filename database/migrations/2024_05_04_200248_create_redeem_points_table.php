@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article', function (Blueprint $table) {
-            $table->id('article_id');
-            $table->string('title');
-            $table->string('subtittle');
-            $table->string('content'); 
-            $table->binary('image_data');
+        Schema::create('redeem_points', function (Blueprint $table) {
+            $table->id();
+            $table->integer('user_id');
+            $table->integer('point');
+            $table->string('voucher',300);
             $table->timestamps();
-
         });
     }
 
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article');
+        Schema::dropIfExists('redeem_points');
     }
 };

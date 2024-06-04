@@ -7,22 +7,64 @@ use App\Models\Order;
 use App\Models\User;
 use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RedeemPoint;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
     public function getHome()
     {
-        return view('customer.index');
+        $user_data = Auth::user();
+        $data_article = Article::all();
+        return view('customer.index', [
+            'user_data' =>  $user_data,
+            'data_article' => $data_article,
+        ]);
     }
-
     public function createOrder()
     {
         return view('customer.order');
     }
 
+    public function reedemPoint()
+    {
+        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
+                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
+                            ->where('user.user_id',auth()->user()->user_id)
+                            ->get();
+        return view('customer.reedem-point',$data);
+    }
+
+    public function historyAllReedemPoint()
+    {
+        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
+                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
+                            ->get();
+        return view('customer.reedem-point-history',$data);
+    }
+    function storeReedemPoint(Request $request){
+        try {
+            $point = new RedeemPoint();
+            $point->voucher = $request->voucher;
+            $point->point = $request->point;
+            $point->user_id = auth()->user()->user_id;
+            $point->created_at = date('Y-m-d H:i:s');
+            $point->save();
+
+
+            $user = User::find(auth()->user()->user_id);
+            $user->total_points = $user->total_points - $request->point;
+            $user->save();
+
+            return response()->json(["status"=>200]);
+        } catch (\Throwable $th) {
+
+            return response()->json(["status"=>500]);
+        }
+    }
+
     public function submitOrder(Request $request)
-    {       
+    {
         $request->validate([
             'name' => 'required',
             'phoneNo' => 'required',
@@ -65,11 +107,6 @@ class UserController extends Controller
         }
     }
 
-    public function getHistory()
-    {
-        return view('historyschedulepickup.index');
-    }
-
     public function getRedeemspoints()
     {
         return view('customer.redeempoint1');
@@ -81,7 +118,7 @@ class UserController extends Controller
     }
 
     public function submitComplaint(Request $request)
-    {       
+    {
         $request->validate([
             'name' => 'required',
             'phoneNo' => 'required',
@@ -105,5 +142,34 @@ class UserController extends Controller
         }
     }
 
-    
+    public function getArticle()
+    {
+        $data_article = Article::all();
+        return view('customer.show-article', compact('data_article'));
+    }
+
+    public function getDetailArticle(Request $request)
+    {
+        $data_article = Article::find($request->article_id);
+        return view('customer.detail-article', [
+            'article' => $data_article
+        ]);
+    }
 }
+
+//     public function delete($id)
+// {
+//     // Cari mobil berdasarkan ID
+//     $order = Order::find($id);
+
+//     // Pastikan mobil ditemukan
+//     if (!$history) {
+//         return redirect()->back()->with('error', 'order tidak ditemukan.');
+//     }
+
+//     // Hapus mobil
+//     $history->delete();
+
+//     // Redirect kembali ke halaman sebelumnya dengan pesan sukses
+//     return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
+// }
