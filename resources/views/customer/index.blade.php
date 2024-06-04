@@ -63,7 +63,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Artikel</h5>
+                        <h5 class="card-title">Artikel WhizCycle</h5>
                         <div class="row">
                             @foreach($data_article as $data)
                                 <div class="col-md-3 mb-4">
