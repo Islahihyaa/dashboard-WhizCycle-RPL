@@ -22,21 +22,21 @@
             </tr>
           </thead>
           <tbody>
-            <?php $__currentLoopData = $data_order; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <tr>
-                <td><?php echo e($order->schedule_id); ?></td>
-                <td><?php echo e($order->user_id); ?></td>
-                <td><?php echo e($order->pickup_date); ?></td>
-                <td><?php echo e($order->pickup_time); ?></td>
-                <td><?php echo e($order->category_trash); ?></td>
-                <td><?php echo e($order->amount); ?></td>
-                <td><?php echo e($order->notes); ?></td>
-                <td><?php echo e($order->file_payment); ?></td>
-                <td>Pending</td>
-                <td>
-                  <form action="<?php echo e(route('history.delete', ['id' => $order->schedule_id])); ?>" method="POST">
-                    <?php echo csrf_field(); ?>
-                    <?php echo method_field('DELETE'); ?>
+              @foreach ($data_order as $order)
+                  <tr>
+                      <td>{{ $order->schedule_id }}</td>
+                      <td>{{ $order->user_id }}</td>
+                      <td>{{ $order->pickup_date }}</td>
+                      <td>{{ $order->pickup_time }}</td>
+                      <td>{{ $order->category_trash }}</td>
+                      <td>{{ $order->amount }}</td>
+                      <td>{{ $order->notes }}</td>
+                      <td>{{ $order->file_payment }}</td>
+                      <td>{{ $order->status }}</td>
+                      <td>
+                      <form action="{{ route('history.delete', ['id' => $order->schedule_id]) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
                     <button type="submit" class="btn btn-danger">Hapus</button>
                   </form>
                 </td>

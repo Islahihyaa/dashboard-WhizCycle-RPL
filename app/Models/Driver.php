@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Driver extends Model
+{
+    use HasFactory;
+
+    protected $table = 'driver'; // sesuaikan nama tabel dengan yang ada di migrasi database
+
+    protected $primaryKey = 'driver_id';
+
+    protected $fillable = [
+        'vehicle_id',
+        'image_driver',
+        'name_driver',
+        'phoneNo_driver',
+        'license_number',
+    ];
+
+    // Relasi ke model Vehicle
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class, 'vehicle_id', 'vehicle_id');
+    }
+}

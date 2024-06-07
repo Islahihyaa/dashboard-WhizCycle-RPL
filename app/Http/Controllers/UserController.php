@@ -46,6 +46,7 @@ class UserController extends Controller
             'category_trash'=> $request->input('category_trash'),
             'amount' => $request->input('amount'),
             'notes' => $request->input('notes'),
+            'status' => $request->input('status'),
             'file_payment' => $request->input('file_payment'),
         ]);
 

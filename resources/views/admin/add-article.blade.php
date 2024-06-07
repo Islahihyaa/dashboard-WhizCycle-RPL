@@ -1,26 +1,28 @@
 @extends('admin-layout')
 
-@section('title', 'Admin WhizCycle')
+@section('title', 'Admin Article')
 
-@section('manage-article', 'active')
+@section('add-article', 'active')
 
 @section('content')
 
     <main id="main" class="main">
         <!-- Page Content  -->
         <div class="pagetitle">
-            <h1>Kelola Artikel</h1>
+            <h1>Upload Artikel</h1>
         </div>
 
         <section class="section">
             <div class="row">
+
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                        <h5 class="card-title">Tambah Artikel</h5>
-                        <hr>
+
+
 
                         <!-- Add Article Form Elements -->
+                         <!-- Perubahan 2 -->
                         <form method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="row mb-3">
@@ -41,8 +43,9 @@
                                     <input name="image_article" class="form-control" type="file" accept="image/png, image/jpeg" required></input>
                                 </div>
                             </div>
+
                             <div class="text-end">
-                                <button type="submit" class="btn-custom px-5"> SUBMIT</button>
+                                <button type="submit" class="btn-custom px-5">PUBLISH</button>
                             </div>
                         </form>
                     </div>
