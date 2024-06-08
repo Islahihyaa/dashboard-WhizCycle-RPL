@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Order;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\Article;
 use App\Models\Complaint;
-use Illuminate\Support\Facades\Auth;
 use App\Models\RedeemPoint;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
