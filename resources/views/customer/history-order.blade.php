@@ -48,7 +48,7 @@
                                             <form action="{{ route('history.delete', ['id' => $order->schedule_id]) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                <button type="submit" class="btn btn-danger">Batalkan</button>
                                             </form>
                                         </td>
                                     </tr>

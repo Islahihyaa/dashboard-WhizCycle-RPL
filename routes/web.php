@@ -93,8 +93,8 @@ Route::delete('order/{id}', [UserController::class, 'destroy'])->name('order.des
 Route::get('success-payment', [UserController::class, 'getSuccessPayment']);
 
 // History Routes
-Route::get('history', [UserController::class, 'getHistory'])->name('history');
-Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
+Route::get('riwayat', [UserController::class, 'getHistory'])->name('history');
+Route::delete('riwayat/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
 
 // Redeem Points Routes
 Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
