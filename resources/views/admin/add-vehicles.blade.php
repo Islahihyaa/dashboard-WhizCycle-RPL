@@ -81,12 +81,6 @@
                         @endforeach
                     </div>
                     @endif
-                    @if(Session::has('status'))
-                        <div class="alert alert-success"> {{ Session::get('status') }}</div>
-                    @endif
-                    @if(Session::has('notSetDataMessage'))
-                        <div class="alert alert-success"> {{ Session::get('notSetDataMessage') }}</div>
-                    @endif
                     </div>
                 </div>
             </div>

@@ -85,7 +85,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="home" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('home')" href="home" data-bs-target="#collapseHome">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
@@ -106,7 +106,7 @@
       </li> 
       
       <li class="nav-item">
-        <a class="nav-link <?= request()->segment(1) != "redeem-point" ?  "collapsed" :"" ?>" href="<?= url('redeem-point') ?>">
+        <a class="nav-link @yield('tukarpoint')" href="<?= url('redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point </span>
         </a>
