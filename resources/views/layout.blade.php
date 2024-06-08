@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    
+
     <!-- Favicons -->
     <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+
     <!-- Vendor CSS Files -->
     <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -24,10 +24,10 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-    
+
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
     @stack('styles')
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
   .dotted-line {
@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-      <img src="images/logo.png" alt="logo" width="180" height="60" >
+    <img src="{{ asset('images/logo.png') }}" alt="logo" width="180" height="60" >
   </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -63,7 +63,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>
@@ -85,7 +84,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link @yield('home')" href="home" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('home')" href="{{url('/home')}}">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
@@ -103,24 +102,24 @@
           <i class="bi bi-clock-history"></i>
           <span>Riwayat</span>
         </a>
-      </li> 
-      
+      </li>
+
       <li class="nav-item">
-        <a class="nav-link @yield('tukarpoint')" href="<?= url('redeem-point') ?>">
+        <a class="nav-link @yield('redeem-point')" href="{{url('/redeem-point')}}">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point </span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('article')" href="{{url('article')}}">
+        <a class="nav-link @yield('article')" href="{{url('/article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('customer-service')" href="{{url('customer-service')}}">
+        <a class="nav-link @yield('customer-service')" href="{{url('/customer-service')}}">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>

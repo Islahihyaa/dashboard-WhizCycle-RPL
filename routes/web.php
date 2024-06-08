@@ -6,9 +6,10 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VoucherController;
 use App\Http\Middleware\AuthenticatingMiddleware;
-use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\OnlyAdmin;
+use App\Http\Middleware\OnlyCustomer;
 
-// Landing Page
+
 Route::get('/', [LandingController::class, 'index']);
 
 //* Authentication
@@ -33,10 +34,10 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
     // Manage Users
     Route::get('manageuser', [AdminController::class, 'showUsers'])->name('manageuser');
-    Route::get('admin/users/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
-    Route::put('admin/users/edit/{user}', [AdminController::class, 'update'])->name('user.update');
-    Route::delete('/admin/delete/{user}', [AdminController::class, 'delete'])->name('admin.delete');
-    
+    Route::get('admin/users/edit/{user_id}', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::put('admin/users/edit/{user_id}', [AdminController::class, 'update'])->name('user.update');
+    Route::delete('/admin/delete/{user_id}', [AdminController::class, 'delete'])->name('admin.delete');
+
 // Storan Sampah
 Route::get('manage-order', [AdminController::class, 'getManageOrder']);
 Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
@@ -94,7 +95,7 @@ Route::get('success-payment', [UserController::class, 'getSuccessPayment']);
 
 // History Routes
 Route::get('riwayat', [UserController::class, 'getHistory'])->name('history');
-Route::delete('riwayat/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
+Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
 
 // Redeem Points Routes
 Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);

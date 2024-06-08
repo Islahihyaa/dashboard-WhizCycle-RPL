@@ -2,7 +2,7 @@
 
 @section('title', 'WhizCycle')
 
-@section('manage-voucher', 'active')
+@section('voucher', 'active')
 
 @section('content')
 

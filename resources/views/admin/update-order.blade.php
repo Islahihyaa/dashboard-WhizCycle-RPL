@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle | Update Order')
 
+@section('manage-order', 'active')
+
 @section('content')
 
 <main id="main" class="main">

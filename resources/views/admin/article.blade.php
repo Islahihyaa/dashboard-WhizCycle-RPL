@@ -1,6 +1,8 @@
-@extends('admin-layout')
+@extends('layout')
 
 @section('title', 'WhizCycle | Upload Artikel')
+
+@section('manage-article', 'active')
 
 @section('content')
 

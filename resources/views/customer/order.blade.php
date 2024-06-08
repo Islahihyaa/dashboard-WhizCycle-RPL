@@ -97,11 +97,16 @@
                             <div class="row mb-3">
                                 <label for="inputFilePayment" class="col-sm-2 col-form-label">Bukti Pembayaran</label>
                                 <div class="col-sm-10">
-                                    <input id="inputFilePayment" class="form-control" type="file" name="file_payment" require>
+                                    <input id="inputFilePayment" class="form-control" type="file" name="file_payment" accept="image/png, image/jpeg" required>
                                 </div>
                             </div>
 
                             <div class="card-description">
+                                <ul>
+                                    <li class="list-group-item">BNI = 12022222 a.n Daulay</li>
+                                    <li class="list-group-item">BRI = 12021234 a.n William</li> 
+                                    <li class="list-group-item">BCA = 12021321 a.n David</li>
+                                </ul>
                                 <p>Keterangan Pembayaran : </p>
                                 <ul>
                                     <li class="list-group-item">1. Berat 0 - 5 Kg = Rp 25.000,-</li>
@@ -110,11 +115,31 @@
                                 </ul>
                             </div>
                             <div class="text-center">
-                                <button type="submit" class="btn-custom btn-lg px-5"> SUBMIT </button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#modalOrder" class="btn-custom btn-lg px-5"> SUBMIT </button>
                             </div>
                             
-                        </form><!-- End General Form Elements -->
 
+                            <!-- Modal -->  
+                            <div class="modal fade" id="modalOrder" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Konfirmasi Penjemputan Sampah</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Apakah Anda yakin data sudah tepat?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success">
+                                            PESAN SEKARANG
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div><!-- End Modal-->
+                        </form>
 
                     </div>
                 </div>

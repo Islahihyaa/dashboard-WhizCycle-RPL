@@ -2,7 +2,7 @@
 
 @section('title', 'WhizCycle')
 
-@section('tukarpoint', 'active')
+@section('redeem-point', 'active')
 
 @section('content')
 
@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 card-img-container">
-                                    <img src="https://nuts.com/images/rackcdn/ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/5788%20Chocolate%20Gold%20-xnBkCoaB-zoom.jpg" alt="image" class="card-img">
+                                    <img src="{{ asset('images/image-tukar-point.jpg') }}" alt="image" class="card-img">
                                 </div>
                                 <div class="col-md-6">
                                     <br><br><br>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </section>
-        
+
 
         <section class="section" id="purchase-reedem" style="display:none;">
             <div class="row">
@@ -81,7 +81,7 @@
                                             <div style="position: absolute; top: 50%; left: 85%; transform: translate(-50%, -50%); color: white; font-size: 24px;">
                                                 <p style="margin-top:20px;" id="vc-pass">Pass <?= number_format($v->point) ?> Points</p>
                                             </div>
-                                           
+
                                         </div>
                                         <div class="col-md-3"></div>
                                     </div>
@@ -99,7 +99,7 @@
                                                     <div class="col-md-6 text-left">Information</div>
                                                     <div class="col-md-6 text-right" id="minus-point">-1000 Points</div>
                                                     <div class="dotted-line"></div>
-                                                    
+
                                                     <div class="col-md-6">
                                                         <br><br>
                                                         <i class="bi bi-share bi-lg"></i>
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </section>
-        
+
         <section class="section" id="history-reedem" style="display:none;">
             <div class="row">
                 <div class="col">
@@ -170,13 +170,13 @@
                                                 @endforeach
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Earn Content -->
                                         <div class="tab-pane fade" id="earn">
                                             <h3>Earn Content</h3>
                                             <p>This is the content for the Earn tab.</p>
                                         </div>
-                                        
+
                                         <!-- Redeem Content -->
                                         <div class="tab-pane fade" id="redeem">
                                         <br>
@@ -220,7 +220,7 @@
         <h5 class="modal-title" id="reedemModalTitle">Redeem Point Confirmation</h5>
       </div>
       <div class="modal-body" id="content-modal">
-         
+
       </div>
       <div class="modal-footer">
         <input type="hidden" id="point-pass" value="0">
@@ -245,24 +245,24 @@
     tabLinks.forEach(function(tabLink) {
         tabLink.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default link behavior
-            
+
             // Remove 'show active' class from all tab panes
             document.querySelectorAll('.tab-pane').forEach(function(tabPane) {
                 tabPane.classList.remove('show', 'active');
             });
-            
+
             // Get the target tab pane
             const targetId = tabLink.getAttribute('href').substring(1);
             const targetPane = document.getElementById(targetId);
-            
+
             // Add 'show active' class to the target tab pane
             targetPane.classList.add('show', 'active');
-            
+
             // Remove 'active' class from all tab links
             tabLinks.forEach(function(link) {
                 link.classList.remove('active');
             });
-            
+
             // Add 'active' class to the clicked tab link
             tabLink.classList.add('active');
         });
@@ -308,7 +308,7 @@
         $("#vc-nominal").html(voucher);
         $("#vc-pass").html("Pass "+numeral(point).format('0,0')+" Points");
         $("#minus-point").html("-"+numeral(point).format('0,0')+" Points");
-        $("#reedemModal").modal("show");   
+        $("#reedemModal").modal("show");
     }
     function closeModal() {
         $("#reedemModal").modal("hide");
@@ -338,7 +338,7 @@
     }
     function history(){
         $("#main-reedem").css("display","none");
-        $("#history-reedem").css("display","block");        
+        $("#history-reedem").css("display","block");
     }
     function back(){
         location.reload();
