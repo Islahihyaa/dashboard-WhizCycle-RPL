@@ -1,5 +1,6 @@
 <!-- resources/views/admin/edit.blade.php -->
 
+@extends('admin.dashboard')
 <!-- @extends('admin.dashboard') -->
 
 @section('title', 'Edit User')

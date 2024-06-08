@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', 'WhizCycle')
+@section('title', 'WhizCycle | Show article')
 
 @section('article', 'active')
 
@@ -23,8 +23,8 @@
                             @foreach($data_article as $data)
                                 <div class="col-md-3 mb-4">
                                     <div class="card p-3">
-                                        <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4 img-object-fit" alt="Article Image" width="150" height="190">
-
+                                        {{-- <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4" alt="article-image" width="180" height="190"> --}}
+                                        <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4 img-object-fit" alt="Article Image" width="150" height="190">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $data->title }}</h5>
                                             <p class="card-text">{{ Str::limit($data->content, 100) }}</p>
@@ -35,21 +35,12 @@
                             @endforeach
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>
     </section>
 
 </main><!-- End #main -->
-
-@push('styles')
-    <style>
-        /* Custom CSS */
-        .img-object-fit {
-            object-fit: cover; /* or any other value */
-        }
-    </style>
-@endpush
 
 @endsection

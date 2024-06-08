@@ -24,7 +24,7 @@
                         </div>
 
                         <div class="col">
-                            <table class="table datatable">
+                            <table class="table datatable" id="manageVehiclesTable">
                             <thead class="table-light">
                                 <tr>
                                     <th>ID Kendaraan</th>

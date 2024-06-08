@@ -95,13 +95,15 @@
         </a>
       </li>
 
+      @if(Auth::user()->role_id == 2)
       <li class="nav-item">
         <a class="nav-link @yield('riwayat')" href="{{url('/riwayat')}}">
           <i class="bi bi-clock-history"></i>
           <span>Riwayat</span>
         </a>
       </li>
-
+      @endif
+      
       <li class="nav-item">
         <a class="nav-link @yield('redeem-point')" href="{{url('/redeem-point')}}">
           <i class="bi bi-star-fill"></i>
@@ -122,7 +124,6 @@
           <span>Customer Service</span>
         </a>
       </li>
-    </ul>
 
   </aside><!-- End Sidebar-->
 
