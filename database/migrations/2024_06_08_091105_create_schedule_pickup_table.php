@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('category_trash');
             $table->integer('amount');
             $table->string('notes');
+            $table->string('status')->default('Menunggu Proses Verifikasi');
             $table->string('file_payment');
             $table->timestamps();
         });

@@ -144,7 +144,40 @@ class UserController extends Controller
         }
     }
 
-    public function getArticle()
+    public function getHistory()
+    {
+        $data_order = Order::all();
+
+        return view('customer.history-order', ['data_order' => $data_order]);
+    }
+
+
+    public function index()
+    {
+        // Ambil semua data riwayat dari model Order
+        $data_order = Order::all();
+
+        // Kembalikan data riwayat ke tampilan
+        return view('history.index', ['data_order' => $data_order]);
+    }
+    public function deleteHistory($id)
+    {
+        // Cari data riwayat berdasarkan ID
+        $order = Order::find($id);
+        
+        // Pastikan data riwayat ditemukan
+        if (!$order) {
+            return redirect()->back()->with('error', 'Data riwayat tidak ditemukan.');
+        }
+        
+        // Hapus data riwayat
+        $order->delete();
+        
+        // Redirect kembali ke halaman riwayat dengan pesan sukses
+        return redirect('riwayat')->with('success', 'Data riwayat berhasil dihapus.');
+    }
+        
+        public function getArticle()
     {
         $data_article = Article::all();
         return view('customer.show-article', compact('data_article'));
@@ -175,3 +208,12 @@ class UserController extends Controller
 //     // Redirect kembali ke halaman sebelumnya dengan pesan sukses
 //     return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
 // }
+
+    
+    
+
+
+
+
+
+

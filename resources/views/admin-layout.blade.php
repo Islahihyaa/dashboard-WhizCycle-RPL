@@ -113,6 +113,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/manage-order')}}">
+          <i class="bi bi-truck"></i>
+          <span>Setoran Sampah</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link @yield('redeem-point-history')" href="<?= url('history-all-redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Riwayat Tukar Point </span>

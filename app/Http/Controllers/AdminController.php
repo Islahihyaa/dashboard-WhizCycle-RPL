@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Models\Complaint;
 use App\Models\Vehicle;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Order;
 use App\Models\Driver;
-
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Report;
-use App\Models\article;
+use App\Models\Article;
 use App\Models\RedeemPoint;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -90,7 +89,6 @@ class AdminController extends Controller
         } else {
             dd($deleteComplaint);
         }
-
     }
 
     public function updateStatus(Request $request, $complaint_id)
@@ -101,7 +99,6 @@ class AdminController extends Controller
 
         Session::flash('updateStatus',"Data Updated To $statusComplaint->status");
         return redirect('response-complaint');
-
     }
 
     public function getManageVehicle()
@@ -131,7 +128,6 @@ class AdminController extends Controller
             'status_vehicle' => $request->input('status_vehicle'),
         ]);
 
-
         if($createAddVehicle) {
             Session::flash('status','Data Kendaraan Berhasil Ditambahkan');
             return redirect('add-vehicles');
@@ -149,7 +145,6 @@ class AdminController extends Controller
 
         Session::flash('updateStatusVehicle',"Data berhasil diubah menjadi $statusVehicle->status_vehicle");
         return redirect('manage-vehicles');
-
     }
 
     public function deleteVehicle($vehicle_id)
@@ -170,7 +165,6 @@ class AdminController extends Controller
             Session::flash('failDeleteVehicle', 'Data kendaraan tidak ditemukan');
             return redirect('manage-vehicles');
         }
-
     }
 
     public function getManageOrder()
@@ -182,8 +176,8 @@ class AdminController extends Controller
     public function detailOrder($schedule_id)
     {
         $updateOrder = Order::find($schedule_id);
-
-        return view('admin.update-order', compact('updateOrder'));
+        $data_driver = Driver::all();
+        return view('admin.update-order', compact('updateOrder', 'data_driver'));
     }
 
     public function submitUpdateOrder(Request $request, $schedule_id)
@@ -264,7 +258,7 @@ class AdminController extends Controller
         $namaFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
         $foto->storeAs('article', $namaFoto);
 
-        article::create([
+        Article::create([
             'judul' => $request->input('judul'),
             'deskripsi' => $request->input('deskripsi'),
             'foto' => $namaFoto,
@@ -405,7 +399,6 @@ class AdminController extends Controller
 
         $editDriver->vehicle_id = $request->input('vehicle_id');
         $editDriver->save();
-
         if($editDriver) {
             Session::flash('successEditDriver','Data berhasil diubah');
             return redirect('manage-driver');
