@@ -12,7 +12,7 @@ body {
 }
 
 a {
-  color: #4154f1;
+  color: #276561;
   text-decoration: none;
 }
 
@@ -71,6 +71,23 @@ h6 {
   font-family: 'Poppins', sans-serif;
   border-radius: 15px;
   padding: 15px 10px 15px 10px ;
+}
+
+.btn-back {
+  background-color: #e02727;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 15px;
+  padding: 15px 10px 15px 10px ;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-back:hover {
+  background-color: #cd2525;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .btn-custom:hover {
@@ -1321,6 +1338,10 @@ h6 {
   background-color: #e10404; 
 }
 
+.edit-icon {
+  background-color: #0467e1; 
+}
+
 .card-total{
   color: #28746f;
   font-size: 52px;
@@ -1345,6 +1366,34 @@ h6 {
 .card-ref:hover {
   color: #28746f;
   text-decoration: none;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 25%;
+  border: 2px solid #ddd;
+}
+
+.text-status {
+  font-weight: bold;
+}
+
+.text-todo {
+  color: green;
+}
+
+.text-inprogress {
+  color: orange;
+}
+
+.text-closed {
+  color: red;
+}
+
+.text-notusable {
+  color: gray;
 }
 
 

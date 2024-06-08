@@ -78,7 +78,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <a href="article" class="card-ref">ketuk untuk melihat artikel lainnya</a>
+                        <a href="{{url('/article')}}" class="card-ref">ketuk untuk melihat artikel lainnya</a>
                     </div>
             </div>
         </section>

@@ -61,7 +61,9 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout">
@@ -90,7 +92,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item"> 
         <a class="nav-link @yield('manage-order')" href="{{url('/manage-order')}}">
           <i class="bi bi-truck"></i>
           <span>Setoran Sampah</span>

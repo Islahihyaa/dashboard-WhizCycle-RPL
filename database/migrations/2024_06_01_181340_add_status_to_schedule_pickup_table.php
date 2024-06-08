@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article', function (Blueprint $table) {
-            $table->id('article_id');
-            $table->string('title');
-            $table->text('content');
-            $table->string('image_article')->nullable();
-            $table->timestamps();
+        Schema::table('schedule_pickup', function (Blueprint $table) {
+            $table->string('status')->default('Menunggu Proses Verifikasi');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article');
+        Schema::table('schedule_pickup', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };

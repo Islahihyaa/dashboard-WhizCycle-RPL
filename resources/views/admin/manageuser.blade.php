@@ -150,9 +150,9 @@
                                                     <li class="dropdown-header text-start">
                                                         <h6>Actions</h6>
                                                     </li>
-                                                    <form method="POST" action="{{ route('admin.edit', ['user_id' => $user->user_id]) }}">
+                                                    <form method="POST" action="{{ route('admin.delete', ['user_id' => $user->user_id]) }}">
                                                         @csrf
-                                                        @method('PUT')
+                                                        @method('DELETE')
                                                         <a href="{{ route('admin.edit', ['user_id' => $user->user_id]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
                                                         <button class="btn btn-delete">Delete</button>
                                                     </form>
