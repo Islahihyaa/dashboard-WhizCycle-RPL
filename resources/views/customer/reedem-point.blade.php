@@ -2,7 +2,7 @@
 
 @section('title', 'WhizCycle')
 
-@section('redeem-point', 'active')
+@section('tukarpoint', 'active')
 
 @section('content')
 

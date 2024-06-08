@@ -93,6 +93,7 @@
       </li>
 
       <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link @yield('manage-order')" href="{{url('/manage-order')}}">
           <i class="bi bi-truck"></i>
           <span>Setoran Sampah</span>
@@ -100,14 +101,14 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('voucher')" href="<?= url('voucher') ?>">
+        <a class="nav-link @yield('manage-voucher')" href="<?= url('voucher') ?>">
           <i class="bi bi-folder"></i>
           <span>Data Voucher</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('redeem-point-history')"" href="<?= url('history-all-redeem-point') ?>">
+        <a class="nav-link @yield('manage-redeem')" href="<?= url('history-all-redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Riwayat Tukar Point </span>
         </a>
