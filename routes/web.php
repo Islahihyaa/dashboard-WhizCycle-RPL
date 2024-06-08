@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\schedulepickupController;
 use App\Http\Middleware\AuthenticatingMiddleware;
+use App\Http\Middleware\OnlyAdmin;
+use App\Http\Middleware\OnlyCustomer;
 
 
 //* Authentication
