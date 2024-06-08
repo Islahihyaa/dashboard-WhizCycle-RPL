@@ -25,33 +25,37 @@ Route::get('dashboard', [AdminController::class, 'getDashboard']);
 
 //* End Authentication
 
-//* Penjemputan Sampah
-Route::get('order', [UserController::class, 'createOrder']);
-Route::post('order', [UserController::class, 'submitOrder'])->name('order');
-//* End Penjemputan Sampah
+Route::middleware(OnlyCustomer::class)->group(function () {
+    //* Penjemputan Sampah
+    Route::get('order', [UserController::class, 'createOrder']);
+    Route::post('order', [UserController::class, 'submitOrder'])->name('order');
+    //* End Penjemputan Sampah
 
-//* History
-Route::get('history', [UserController::class, 'getHistory']);
-Route::get('history', [schedulepickupController::class, 'getHistory']);
+    //* History
+    Route::get('history', [UserController::class, 'getHistory']);
+    Route::get('history', [schedulepickupController::class, 'getHistory']);
 
-//* End History
+    //* End History
 
-//* Redeems Points
-Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
+    //* Redeems Points
+    Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
 
-//* End Redeems Points
+    //* End Redeems Points
 
-//* Customer Sercice 
-Route::get('customer-service', [UserController::class, 'getCustomerService']);
-Route::post('customer-service', [UserController::class, 'submitComplaint']);
-Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
-Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
+    //* Customer Sercice 
+    Route::get('customer-service', [UserController::class, 'getCustomerService']);
+    Route::post('customer-service', [UserController::class, 'submitComplaint']);
+    Route::put('customer-service/{complaint_id}', [AdminController::class, 'updateStatus'])->name('customer-service.update');
+    Route::get('complaint-delete/{complaint_id}', [AdminController::class, 'deleteComplaint']);
 
-//* End Customer Sercice 
-
+    //* End Customer Sercice 
+});
 
 /*--------------------------------------------------------------
 # Admin
 --------------------------------------------------------------*/
 
-Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
+Route::middleware(OnlyAdmin::class)->group(function () {
+    Route::get('response-complaint', [AdminController::class, 'getResponseComplaint']);
+
+});
