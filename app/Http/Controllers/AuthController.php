@@ -44,7 +44,7 @@ class AuthController extends Controller
         ]);
 
         Session::flash('status','Register Success');
-        return redirect ('/');
+        return redirect ('/login');
     }
 
     public function authenticating(Request $request)
@@ -61,12 +61,12 @@ class AuthController extends Controller
             } elseif(Auth::user()->role_id == 2) {
                 return redirect('dashboard');
             } else {
-                return redirect ('/');
+                return redirect ('/login');
             }
 
         } else {
             Session::flash('message','Account not found');
-            return redirect('/');
+            return redirect('/login');
         }
     }
 

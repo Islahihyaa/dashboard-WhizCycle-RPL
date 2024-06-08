@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle')
 
+@section('home', 'active')
+
 @section('content')
 
     <main id="main" class="main">

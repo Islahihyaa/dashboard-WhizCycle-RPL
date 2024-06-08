@@ -8,56 +8,24 @@ use App\Models\User;
 use App\Models\Complaint;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RedeemPoint;
+use App\Models\Article;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    //Show Dashboard
     public function getHome()
     {
         return view('customer.index');
     }
+    // End Show Dashboard
 
+    //Create Order
     public function createOrder()
     {
         return view('customer.order');
     }
 
-    public function reedemPoint()
-    {
-        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
-                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
-                            ->where('user.user_id',auth()->user()->user_id)
-                            ->get();
-        return view('customer.reedem-point',$data);
-    }
-    public function historyAllReedemPoint()
-    {
-        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
-                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
-                            ->get();
-        return view('customer.reedem-point-history',$data);
-    }
-    function storeReedemPoint(Request $request){
-        try {
-            $point = new RedeemPoint();
-            $point->voucher = $request->voucher;
-            $point->point = $request->point;
-            $point->user_id = auth()->user()->user_id;
-            $point->created_at = date('Y-m-d H:i:s');
-            $point->save();
-            
-            
-            $user = User::find(auth()->user()->user_id);
-            $user->total_points = $user->total_points - $request->point;
-            $user->save();
-
-            return response()->json(["status"=>200]);
-        } catch (\Throwable $th) {
-
-            return response()->json(["status"=>500]);
-        }
-    }
-    
     public function submitOrder(Request $request)
     {       
         $request->validate([
@@ -98,13 +66,51 @@ class UserController extends Controller
                 }
                 $user->save();
             }
-            return view ('customer.form-success');
+            return redirect ('success-payment');
         }
     }
 
-    public function getHistory()
+    public function getSuccessPayment()
     {
-        return view('historyschedulepickup.index');
+        return view('customer.form-success');
+    }
+    // End Create Order
+
+
+    public function reedemPoint()
+    {
+        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
+                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
+                            ->where('user.user_id',auth()->user()->user_id)
+                            ->get();
+        return view('customer.reedem-point',$data);
+    }
+    public function historyAllReedemPoint()
+    {
+        $data['history'] = RedeemPoint::select("redeem_points.*",'user.name')
+                            ->leftJoin('user','user.user_id','=','redeem_points.user_id')
+                            ->get();
+        return view('customer.reedem-point-history',$data);
+    }
+    function storeReedemPoint(Request $request){
+        try {
+            $point = new RedeemPoint();
+            $point->voucher = $request->voucher;
+            $point->point = $request->point;
+            $point->user_id = auth()->user()->user_id;
+            $point->created_at = date('Y-m-d H:i:s');
+            $point->save();
+            
+            
+            $user = User::find(auth()->user()->user_id);
+            $user->total_points = $user->total_points - $request->point;
+            $user->save();
+
+            return response()->json(["status"=>200]);
+        } catch (\Throwable $th) {
+
+            return response()->json(["status"=>500]);
+        }
     }
 
     public function getRedeemspoints()
@@ -142,5 +148,42 @@ class UserController extends Controller
         }
     }
 
+    public function getArticle()
+    {
+        $data_article = Article::all();
+        return view('customer.show-article', compact('data_article'));
+    }
+
+    public function getDetailArticle(Request $request)
+    {
+        $data_article = Article::find($request->article_id);
+        return view('customer.detail-article', [
+            'article' => $data_article
+        ]);
+    }
+
+    public function getHistory()
+    {
+        $data_order = Order::all();
+
+        return view('customer.history-order', ['data_order' => $data_order]);
+    }
+
+    public function deleteHistory($id)
+    {
+        // Cari data riwayat berdasarkan ID
+        $order = Order::find($id);
+        
+        // Pastikan data riwayat ditemukan
+        if (!$order) {
+            return redirect()->back()->with('error', 'Data riwayat tidak ditemukan.');
+        }
+        
+        // Hapus data riwayat
+        $order->delete();
+        
+        // Redirect kembali ke halaman riwayat dengan pesan sukses
+        return redirect('riwayat')->with('success', 'Data riwayat berhasil dihapus.');
+    }
     
 }

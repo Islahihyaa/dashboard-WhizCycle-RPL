@@ -6,16 +6,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LandingController;
 use App\Http\Middleware\AuthenticatingMiddleware;
 use App\Http\Middleware\OnlyAdmin;
 use App\Http\Middleware\OnlyCustomer;
 
 
+Route::get('/', [LandingController::class, 'index']);
+
 //* Authentication
 Route::middleware(AuthenticatingMiddleware::class)->group(function () {
-    Route::get('/', [AuthController::class, 'login']);
-    Route::post('/', [AuthController::class, 'authenticating']);
-    Route::get('register', [AuthController::class, 'register']);
+    Route::get('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'authenticating']);
+    Route::get('register', [AuthController::class, 'register']);    
     Route::post('register', [AuthController::class, 'registration']);
 });
 
@@ -32,11 +35,7 @@ Route::middleware(OnlyCustomer::class)->group(function () {
     Route::post('order', [UserController::class, 'submitOrder'])->name('order');
     //* End Penjemputan Sampah
 
-    //* History
-    Route::get('history', [UserController::class, 'getHistory']);
-
     Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
-
 
     //* Penjemputan Sampah
     Route::get('order', [UserController::class, 'createOrder']);
@@ -44,8 +43,8 @@ Route::middleware(OnlyCustomer::class)->group(function () {
     //* End Penjemputan Sampah
 
     //* History
-    Route::get('history', [UserController::class, 'getHistory']);
-
+    Route::get('riwayat', [UserController::class, 'getHistory']);
+    Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
     //* End History
 
     //* Redeems Points
