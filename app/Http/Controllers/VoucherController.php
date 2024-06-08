@@ -74,14 +74,14 @@ class VoucherController extends Controller
             'voucher' => 'required|string|max:255',
             'point' => 'required'
         ]);
-    
+
         $voucher = Voucher::findOrFail($request->voucher_id); // Retrieve the voucher instance
         $voucher->update($request->all());
-    
+
         return redirect()->route('voucher.index')
                          ->with('success', 'Voucher updated successfully.');
     }
-    
+
     public function destroy($id)
     {
         Voucher::find($id)->delete();

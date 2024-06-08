@@ -34,7 +34,7 @@
                             @foreach($data_article as $data)
                                 <div class="col-md-3 mb-4">
                                     <div class="card p-3">
-                                    <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4" alt="article-image" width="100" height="190" object-fit: cover;>
+                                    <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4" alt="article-image" width="100" height="200" style="object-fit: cover;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $data->title }}</h5>
                                             <p class="card-text">{{ Str::limit($data->content, 100) }}</p>
