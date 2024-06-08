@@ -24,7 +24,7 @@
                                         <h1 class="card-total">{{ $total_user }} User</h1>
                                     </div>
                                 <div class="col-md-3 card-img-container">
-                                    <img src="{{ asset('images/dashboard-icon.png') }}" alt="image" class="card-img">
+                                    <img src="{{ url('images/dashboard-icon.jpg') }}" alt="Dashboard Icon">
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                     <h1 class="card-total"> {{ $recyle_total }} Setoran</h1>
                                 </div>
                             <div class="col-md-3 card-img-container">
-                                <img src="{{ asset('images/dashboard-icon2.png') }}" alt="image" class="card-img">
+                                <img src="{{ url('images/dashboard-icon2.jpg') }}" alt="Dashboard Icon 2">
                             </div>
                         </div>
                     </div>
