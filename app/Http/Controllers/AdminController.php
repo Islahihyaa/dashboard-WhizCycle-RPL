@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Complaint;
-use App\Models\Vehicle;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\Order;
+use App\Models\Complaint;
+use App\Models\RedeemPoint;
+use Illuminate\Http\Request;
+use App\Models\Vehicle;
+use App\Models\Role;
 use App\Models\Driver;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Report;
 use App\Models\Article;
-use App\Models\RedeemPoint;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
@@ -209,7 +209,6 @@ class AdminController extends Controller
         $data_order = Order::all();
         return view('historyschedulepickup.index', ['data_order' => $data_order]);
     }
-
     public function deleteHistory(Request $request, $id)
     {
         error_log($request->id);
@@ -222,7 +221,6 @@ class AdminController extends Controller
     {
         // Cari mobil berdasarkan ID
         $order = Order::find($id);
-
         // Pastikan mobil ditemukan
         if (!$order) {
             return redirect()->back()->with('error', 'order tidak ditemukan.');

@@ -54,10 +54,11 @@
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo Auth::user()->name; ?></span>
           </a>
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo Auth::user()->name ?></h6>
-              <span><?php echo Auth::user()->address  ?></span>
+              <h6><?php echo Auth::user()->name; ?></h6>
+              <span><?php echo Auth::user()->address; ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -107,7 +108,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link @yield('home')" href="{{url('/')}}">
+        <a class="nav-link collapsed" href="home" data-bs-target="#collapseHome">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>

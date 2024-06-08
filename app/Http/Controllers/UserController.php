@@ -10,6 +10,8 @@ use App\Models\RedeemPoint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Voucher;
+
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -34,6 +36,8 @@ class UserController extends Controller
                             ->leftJoin('user','user.user_id','=','redeem_points.user_id')
                             ->where('user.user_id',auth()->user()->user_id)
                             ->get();
+        $data['vouchers'] = Voucher::all(); // Ambil semua voucher dari database
+
         return view('customer.reedem-point',$data);
     }
 
@@ -64,7 +68,12 @@ class UserController extends Controller
             return response()->json(["status"=>500]);
         }
     }
-
+    public function getVouchers()
+    {
+        $vouchers = Voucher::all(); // Ambil semua voucher dari database
+        return response()->json($vouchers);
+    }
+    
     public function submitOrder(Request $request)
     {
         $request->validate([
