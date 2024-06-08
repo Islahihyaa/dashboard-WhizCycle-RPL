@@ -164,8 +164,8 @@ class UserController extends Controller
 
     public function getHistory()
     {
-        $data_order = Order::all();
-
+        $user_data = Auth::id();
+        $data_order = Order::all()->where('user_id', $user_data);
         return view('customer.history-order', ['data_order' => $data_order]);
     }
 
