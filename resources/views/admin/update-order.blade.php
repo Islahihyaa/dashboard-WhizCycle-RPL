@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle | Update Order')
 
+@section('manage-order', 'active')
+
 @section('content')
 
 <main id="main" class="main">
@@ -91,6 +93,17 @@
                                         <option value="Menjemput">Menjemput</option>
                                         <option value="Selesai">Selesai</option>
                                         <option value="Dibatalkan">Dibatalkan</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Pilih Driver</label>
+                                <div class="col-sm-10">
+                                    <select name="driver_id" class="form-select" required>
+                                        <option>-- Pilih Driver --</option>
+                                        @foreach($data_driver as $selectdriver)
+                                            <option value="{{ $selectdriver->driver_id }}">{{ $selectdriver->name_driver}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

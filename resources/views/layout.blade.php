@@ -26,6 +26,7 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    @stack('styles')
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -53,10 +54,11 @@
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo Auth::user()->name; ?></span>
           </a>
+
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6><?php echo Auth::user()->name ?></h6>
-              <span><?php echo Auth::user()->address  ?></span>
+              <h6><?php echo Auth::user()->name; ?></h6>
+              <span><?php echo Auth::user()->address; ?></span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -95,14 +97,12 @@
         </a>
       </li>
 
-      @if(Auth::user()->role_id == 2)
       <li class="nav-item">
         <a class="nav-link @yield('riwayat')" href="{{url('/riwayat')}}">
           <i class="bi bi-clock-history"></i>
           <span>Riwayat</span>
         </a>
-      </li>
-      @endif
+      </li> 
       
       <li class="nav-item">
         <a class="nav-link @yield('redeem-point')" href="{{url('/redeem-point')}}">

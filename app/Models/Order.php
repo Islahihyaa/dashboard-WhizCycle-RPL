@@ -19,6 +19,7 @@ class Order extends Model
         'pickup_time',
         'category_trash',
         'amount',
+        'status',
         'notes',
         'file_payment',
     ];

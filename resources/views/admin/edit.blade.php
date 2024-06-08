@@ -1,7 +1,4 @@
-<!-- resources/views/admin/edit.blade.php -->
-
-@extends('admin.dashboard')
-<!-- @extends('admin.dashboard') -->
+@extends('admin-layout')
 
 @section('title', 'Edit User')
 
@@ -17,7 +14,7 @@
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Role</label>
-                <input type="text" class="form-control" id="role" name="role" value="{{ $user->role_id }}">
+                <input type="text" class="form-control" id="role" name="role_id" value="{{ $user->role_id }}">
             </div>
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>

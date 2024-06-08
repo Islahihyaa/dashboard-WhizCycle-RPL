@@ -70,8 +70,7 @@
                                 </div>
                             </div>
                             <div class="text-end">
-                                <a href="{{ url('/manage-vehicles') }}" class="btn-back px-5">KEMBALI</a>
-                                <button type="submit" class="btn-custom px-5">SUBMIT</button>
+                                <button type="submit" class="btn-custom px-5"> SUBMIT</button>
                             </div>
                         </form>
                     </div>

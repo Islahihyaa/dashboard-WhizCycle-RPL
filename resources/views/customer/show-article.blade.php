@@ -23,24 +23,30 @@
                             @foreach($data_article as $data)
                                 <div class="col-md-3 mb-4">
                                     <div class="card p-3">
-                                        {{-- <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4" alt="article-image" width="180" height="190"> --}}
-                                        <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4 img-object-fit" alt="Article Image" width="150" height="190">
+                                        <img src="{{ asset('storage/' . $data->image_article) }}" class="card-img-top my-4 img-object-fit" alt="Article Image" width="150" height="190">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $data->title }}</h5>
                                             <p class="card-text">{{ Str::limit($data->content, 100) }}</p>
-                                            <a href="{{url('/read-article/'. $data->article_id)}}" class="btn-custom">Read More</a>
+                                            <a href="{{ url('/read-article/' . $data->article_id) }}" class="btn-custom">Read More</a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
 </main><!-- End #main -->
+
+@push('styles')
+    <style>
+        .img-object-fit {
+            object-fit: cover;
+        }
+    </style>
+@endpush
 
 @endsection

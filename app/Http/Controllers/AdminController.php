@@ -2,24 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Models\Complaint;
-use App\Models\Vehicle;
 use App\Models\User;
-use App\Models\Role;
 use App\Models\Order;
+use App\Models\Complaint;
+use App\Models\RedeemPoint;
+use Illuminate\Http\Request;
+use App\Models\Vehicle;
+use App\Models\Role;
 use App\Models\Driver;
-
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Report;
-use App\Models\article;
-use App\Models\RedeemPoint;
+use App\Models\Article;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -46,30 +45,48 @@ class AdminController extends Controller
         return view('admin.manageuser', ['users' => $users]);
     }
 
-    public function edit(User $user)
+    public function edit($user_id)
     {
+        $user = User::find($user_id);
         return view('admin.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
-{
-    // Validate the incoming request data
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'role_id' => 'required|integer',
-        'address' => 'nullable|string|max:255',
-        'phoneNo' => 'nullable|string|max:15',
-        'created_at' => 'required|date',
-        'total_points' => 'required|integer'
-    ]);
-
-    // Update the user with the validated data
+    public function update(Request $request, $user_id)
     {
-    $user->update($request->all());
+        $user = User::find($user_id);   
 
-    // Redirect to a page after updating
-    return redirect()->route('manageuser')->with('success', 'User updated successfully.');
-}
+
+        // Update pengguna dengan data yang divalidasi
+        $user->name = $request->input('name');
+        $user->role_id = $request->input('role_id');
+        $user->address = $request->input('address');
+        $user->phoneNo = $request->input('phoneNo');
+        $user->created_at = $request->input('created_at');
+        $user->total_points = $request->input('total_points');
+
+        // Simpan perubahan
+        $user->save();
+        
+        if($user) {
+            // Redirect to a page after updating
+            return redirect()->route('manageuser')->with('success', 'User updated successfully.');
+        } else {
+            dd('error');
+        }
+        
+    }
+
+    public function delete($user_id)
+    {
+        $deleteUser = User::find($user_id);
+                
+        if($deleteUser) {
+            $deleteUser->delete();
+            Session::flash('deleteUsert','Data Deleted Succesfully');
+            return redirect('manageuser');
+        } else {
+            dd($deleteUser);
+        }
     }
 
     public function getResponseComplaint()
@@ -90,7 +107,6 @@ class AdminController extends Controller
         } else {
             dd($deleteComplaint);
         }
-
     }
 
     public function updateStatus(Request $request, $complaint_id)
@@ -101,7 +117,6 @@ class AdminController extends Controller
 
         Session::flash('updateStatus',"Data Updated To $statusComplaint->status");
         return redirect('response-complaint');
-
     }
 
     public function getManageVehicle()
@@ -131,7 +146,6 @@ class AdminController extends Controller
             'status_vehicle' => $request->input('status_vehicle'),
         ]);
 
-
         if($createAddVehicle) {
             Session::flash('status','Data Kendaraan Berhasil Ditambahkan');
             return redirect('add-vehicles');
@@ -149,7 +163,6 @@ class AdminController extends Controller
 
         Session::flash('updateStatusVehicle',"Data berhasil diubah menjadi $statusVehicle->status_vehicle");
         return redirect('manage-vehicles');
-
     }
 
     public function deleteVehicle($vehicle_id)
@@ -170,7 +183,6 @@ class AdminController extends Controller
             Session::flash('failDeleteVehicle', 'Data kendaraan tidak ditemukan');
             return redirect('manage-vehicles');
         }
-
     }
 
     public function getManageOrder()
@@ -182,8 +194,8 @@ class AdminController extends Controller
     public function detailOrder($schedule_id)
     {
         $updateOrder = Order::find($schedule_id);
-
-        return view('admin.update-order', compact('updateOrder'));
+        $data_driver = Driver::all();
+        return view('admin.update-order', compact('updateOrder', 'data_driver'));
     }
 
     public function submitUpdateOrder(Request $request, $schedule_id)
@@ -215,7 +227,6 @@ class AdminController extends Controller
         $data_order = Order::all();
         return view('historyschedulepickup.index', ['data_order' => $data_order]);
     }
-
     public function deleteHistory(Request $request, $id)
     {
         error_log($request->id);
@@ -228,7 +239,6 @@ class AdminController extends Controller
     {
         // Cari mobil berdasarkan ID
         $order = Order::find($id);
-
         // Pastikan mobil ditemukan
         if (!$order) {
             return redirect()->back()->with('error', 'order tidak ditemukan.');
@@ -264,7 +274,7 @@ class AdminController extends Controller
         $namaFoto = uniqid() . '.' . $foto->getClientOriginalExtension();
         $foto->storeAs('article', $namaFoto);
 
-        article::create([
+        Article::create([
             'judul' => $request->input('judul'),
             'deskripsi' => $request->input('deskripsi'),
             'foto' => $namaFoto,
@@ -405,7 +415,6 @@ class AdminController extends Controller
 
         $editDriver->vehicle_id = $request->input('vehicle_id');
         $editDriver->save();
-
         if($editDriver) {
             Session::flash('successEditDriver','Data berhasil diubah');
             return redirect('manage-driver');

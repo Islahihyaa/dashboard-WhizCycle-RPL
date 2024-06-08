@@ -40,7 +40,7 @@
                                                 {{ $user->role }}
                                             @endif
                                         </td>
-                                        <td>{{ $user->created_at->format('d M, Y') }}</td>
+                                        <td>{{ $user->created_at ? $user->created_at->format('d M, Y') : 'N/A' }}</td>
                                         <td>{{ $user->total_points }}</td>
                                         <td>
                                             <div class="filter">
@@ -51,12 +51,16 @@
                                                     <li class="dropdown-header text-start">
                                                         <h6>Actions</h6>
                                                     </li>
-                                                    <form method="POST" action="{{ route('admin.edit', ['user' => $user->user_id]) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <a href="{{ route('admin.edit', ['user' => $user->user_id]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
-                                                        <button class="btn btn-delete">Delete</button>
-                                                    </form>
+                                                    <li>
+                                                        <a href="{{ route('admin.edit', ['user' => $user->user_id]) }}" class="dropdown-item"><i class="bi bi-pencil-square"></i> Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <form method="POST" action="{{ route('admin.delete', ['user' => $user->user_id]) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item"><i class="bi bi-trash"></i> Delete</button>
+                                                        </form>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>
