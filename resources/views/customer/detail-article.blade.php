@@ -19,7 +19,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $article->title }}</h5>
                         <hr>
-                          <img src="{{asset('storage/'. $article->image_article)}}" class="card-img-top my-4" alt="article-image" class="w-100" height="190" object-fit: cover;>
+                        <img src="{{asset('storage/'. $article->image_article)}}" class="card-img-top my-4" alt="article-image" style="width: 75%; height: auto; object-fit: contain;">
 
                           <p class="text-muted mt-4 text-align-justify w-100">{{$article->content}}</p>
                     </div>

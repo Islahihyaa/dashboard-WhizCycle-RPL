@@ -21,10 +21,10 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <h5 class="card-title">Total User</h5>
-                                        <h1 class="card-total">{{ $total_user }} User</h1>
+                                        <h1 class="card-total">{{ $total_user}} User</h1>
                                     </div>
                                 <div class="col-md-3 card-img-container">
-                                    <img src="{{ asset('images/dashboard-icon.png') }}" alt="image" class="card-img">
+                                    <img src="{{ asset('images/dashboard-icon.jpg') }}" alt="image" class="card-img">
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                     <h1 class="card-total"> {{ $recyle_total }} Setoran</h1>
                                 </div>
                             <div class="col-md-3 card-img-container">
-                                <img src="{{ asset('images/dashboard-icon2.png') }}" alt="image" class="card-img">
+                                <img src="{{ asset('images/dashboard-icon2.jpg') }}" alt="image" class="card-img">
                             </div>
                         </div>
                     </div>
