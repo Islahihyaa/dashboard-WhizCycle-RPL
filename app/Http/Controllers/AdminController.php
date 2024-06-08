@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function getManageUser()
     {
-        return view('admin.manageuser');
+        return view('admin.manageuser', ['users' => $users]);
     }
 
     public function showUsers()
@@ -45,8 +45,9 @@ class AdminController extends Controller
         return view('admin.manageuser', ['users' => $users]);
     }
 
-    public function edit(User $user)
+    public function edit($user_id)
     {
+        $user = User::find($user_id);
         return view('admin.edit', compact('user'));
     }
 

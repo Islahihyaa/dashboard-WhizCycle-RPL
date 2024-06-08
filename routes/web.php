@@ -33,9 +33,9 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
     // Manage Users
     Route::get('manageuser', [AdminController::class, 'showUsers'])->name('manageuser');
-    Route::get('admin/users/edit/{user}', [AdminController::class, 'edit'])->name('admin.edit');
+    Route::get('admin/users/edit/{user_id}', [AdminController::class, 'edit'])->name('admin.edit');
     Route::put('admin/users/edit/{user}', [AdminController::class, 'update'])->name('user.update');
-    Route::delete('/admin/delete/{user}', [AdminController::class, 'delete'])->name('admin.delete');
+    Route::delete('/admin/delete/{user_id}', [AdminController::class, 'delete'])->name('admin.delete');
     
 // Storan Sampah
 Route::get('manage-order', [AdminController::class, 'getManageOrder']);
