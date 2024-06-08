@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle')
 
+@section('history-redeem-point', 'active')
+
 @section('content')
 
     <main id="main" class="main">

@@ -55,7 +55,7 @@
                                 <h5 class="card-title">Terima Kasih!</h5>
                                 <h1 class="card-total">{{ $user_data->total_points}} Points</h1>
                                 <p class="card-subtext">Nikmati manfaatnya dengan menukarkan poin Anda!</p>
-                                <a href="redeems-point" class="card-ref">ketuk untuk menukar point</a>
+                                <a href="<?= url('redeem-point') ?>" class="card-ref">ketuk untuk menukar point</a>
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <a href="article" class="card-ref">ketuk untuk melihat artikel lainnya</a>
+                        <a href="{{url('/article')}}" class="card-ref">ketuk untuk melihat artikel lainnya</a>
                     </div>
             </div>
         </section>

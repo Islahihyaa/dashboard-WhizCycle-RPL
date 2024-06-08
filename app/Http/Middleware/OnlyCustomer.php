@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AuthenticatingMiddleware
+class OnlyCustomer
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,9 @@ class AuthenticatingMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check()) {
-            if(Auth::user()->role_id == 1) {
-                return redirect('home');
-            } elseif(Auth::user()->role_id == 2) {
-                return redirect('dashboard');
-            } 
-        }else{
-            return $next($request);
-        }
-
+        if(Auth::user()-> role_id != 1) {
+            return redirect('dashboard');
+        } 
+        return $next($request);
     }
 }

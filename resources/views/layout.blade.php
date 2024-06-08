@@ -44,7 +44,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-      <img src="images/logo.png" alt="logo" width="180" height="60" >
+    <img src="{{ asset('images/logo.png') }}" alt="logo" width="180" height="60" >
   </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -63,7 +63,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>
@@ -85,7 +84,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="home" data-bs-target="#collapseHome">
+        <a class="nav-link @yield('home')" href="{{url('/home')}}">
           <i class="bi bi-house"></i>
           <span>Beranda</span>
         </a>
@@ -106,21 +105,21 @@
       </li> 
       
       <li class="nav-item">
-        <a class="nav-link <?= request()->segment(1) != "redeem-point" ?  "collapsed" :"" ?>" href="<?= url('redeem-point') ?>">
+        <a class="nav-link @yield('tukarpoint')" href="<?= url('redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point </span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('article')" href="{{url('article')}}">
+        <a class="nav-link @yield('article')" href="{{url('/article')}}">
           <i class="bi bi-newspaper"></i>
           <span>Edukasi Lingkungan</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('customer-service')" href="{{url('customer-service')}}">
+        <a class="nav-link @yield('customer-service')" href="{{url('/customer-service')}}">
           <i class="bi bi-headset"></i>
           <span>Customer Service</span>
         </a>
