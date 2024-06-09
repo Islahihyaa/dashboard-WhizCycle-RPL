@@ -20,7 +20,7 @@
                         <h5 class="card-title">Data Kendaraan</h5>
                         <hr>
                         <div class="text-start my-5">
-                            <a href ="add-vehicles" name="add-vehicle" class="btn-custom"><i class="bi bi-plus-circle"></i><span class="m-2">Tambah Kendaraan</span></a>
+                            <a href ="add-vehicles" name="add-vehicle" class="btn-custom" dusk="add-vehicle"><i class="bi bi-plus-circle"></i><span class="m-2">Tambah Kendaraan</span></a>
                         </div>
 
                         <div class="col">
@@ -59,7 +59,7 @@
                                         </td>
                                         <td scope="row">
                                             <div class="filter">
-                                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false"  dusk="dropdown-toggle">
                                                     <i class="bi bi-three-dots m-3"></i>
                                                 </a>
                                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" style="">
@@ -69,10 +69,10 @@
                                                     <form method="POST" action="{{ route('status-vehicle.update', ['vehicle_id' => $data->vehicle_id]) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Sudah Baik">Sudah Baik</button>
-                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Butuh Perbaikan">Butuh Perbaikan</button>
-                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Sedang Dalam Perbaikan">Sedang Dalam Perbaikan</button>
-                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Tidak Dapat Digunakan">Tidak Dapat Digunakan</button>
+                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Sudah Baik" dusk="status-option-sudah-baik">Sudah Baik</button>
+                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Butuh Perbaikan" dusk="status-option-butuh-perbaikan">Butuh Perbaikan</button>
+                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Sedang Dalam Perbaikan" dusk="status-option-sedang-dalam-perbaikan">Sedang Dalam Perbaikan</button>
+                                                        <button type="submit" class="dropdown-item" name="status_vehicle" value="Tidak Dapat Digunakan" dusk="tidak-dapat-digunakan">Tidak Dapat Digunakan</button>
                                                     </form>
                                                 </ul>
                                                     <i class="bi bi-trash3-fill icon-background delete-icon" data-bs-toggle="modal" data-bs-target="#modal{{ $data->vehicle_id }}"></i>

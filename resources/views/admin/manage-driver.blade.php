@@ -20,7 +20,7 @@
                         <h5 class="card-title">Data Driver</h5>
                         <hr>
                         <div class="text-start my-5">
-                            <a href ="add-driver" name="add-driver" class="btn-custom"><i class="bi bi-plus-circle"></i><span class="m-2">Tambah Driver</span></a>
+                            <a href ="add-driver" name="add-driver" class="btn-custom" dusk="add-driver"><i class="bi bi-plus-circle"></i><span class="m-2">Tambah Driver</span></a>
                         </div>
 
                         <div class="col">
@@ -49,10 +49,10 @@
                                         <td scope="row">{{ $data -> license_number }}</td>
                                         <td scope="row">{{ $data -> vehicle -> name_vehicle }}</td>
                                         <td scope="row">
-                                            <a class="icon" href="{{ route('edit-driver-data', ['driver_id' => $data->driver_id] ) }}" >
+                                            <a class="icon" href="{{ route('edit-driver-data', ['driver_id' => $data->driver_id] ) }}" dusk="update-driver">
                                                 <i class="bi bi-pencil-fill icon-background edit-icon"></i>
                                             </a>
-                                            <i class="bi bi-trash3-fill icon-background delete-icon" data-bs-toggle="modal" data-bs-target="#modal{{ $data->driver_id }}"></i>
+                                            <i class="bi bi-trash3-fill icon-background delete-icon" data-bs-toggle="modal" data-bs-target="#modal{{ $data->driver_id }}" dusk="delete-driver"></i>
                                             <form action="{{ route('data-driver.delete', ['driver_id' => $data->driver_id]) }}">
                                             @csrf
                                             @method('DELETE')

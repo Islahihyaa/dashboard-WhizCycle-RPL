@@ -23,6 +23,7 @@ Route::middleware(AuthenticatingMiddleware::class)->group(function () {
 // Auth Routes
 Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::middleware(OnlyAdmin::class)->group(function () {
 // Admin Dashboard
     Route::get('dashboard', [AdminController::class, 'getDashboard']);
 
@@ -38,10 +39,10 @@ Route::get('/logout', [AuthController::class, 'logout']);
     Route::put('admin/users/edit/{user_id}', [AdminController::class, 'update'])->name('user.update');
     Route::delete('/admin/delete/{user_id}', [AdminController::class, 'delete'])->name('admin.delete');
     
-// Storan Sampah
-Route::get('manage-order', [AdminController::class, 'getManageOrder']);
-Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
-Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
+    // Storan Sampah
+    Route::get('manage-order', [AdminController::class, 'getManageOrder']);
+    Route::get('manage-order-detail/{schedule_id}', [AdminController::class, 'detailOrder'])->name('manage-order-detail');
+    Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submitUpdateOrder']);
 
 
     // Manage Vehicles
@@ -84,49 +85,53 @@ Route::put('manage-order-detail/{schedule_id}', [AdminController::class, 'submit
     // Manage Redeem Points History
     Route::get('history-all-redeem-point', [AdminController::class, 'historyAllReedemPoint']);
 
-// User Routes
-Route::get('home', [UserController::class, 'getHome']);
+    // Voucher Routes
+    Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
+    Route::get('/voucher/create', [VoucherController::class, 'create'])->name('voucher.create');
+    Route::post('/voucher', [VoucherController::class, 'store'])->name('voucher.store');
+    Route::get('/voucher/{voucher}', [VoucherController::class, 'show'])->name('voucher.show');
+    Route::get('/voucher/{voucher}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
+    Route::post('/voucher-update', [VoucherController::class, 'update'])->name('voucher.update');
+    Route::get('/voucher-delete/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
 
-// Order Routes
-Route::get('order', [UserController::class, 'createOrder']);
-Route::post('order', [UserController::class, 'submitOrder'])->name('order');
-Route::delete('order/{id}', [UserController::class, 'destroy'])->name('order.destroy');
-Route::get('success-payment', [UserController::class, 'getSuccessPayment']);
+    // Report Routes
+    Route::get('/laporan', [AdminController::class, 'getLaporan'])->name('laporan');
+    Route::get('/get-table/{tableId}', [AdminController::class, 'getTable'])->name('getTable');
+    Route::get('/data-vehicles', [AdminController::class, 'getTableVehicle'])->name('data-vehicles');
+    Route::get('/data-cs', [AdminController::class, 'getTableCS'])->name('data-cs');
+    Route::get('/data-point', [AdminController::class, 'getTablePoint'])->name('data-point');
+    Route::get('/data-user', [AdminController::class, 'getTableUser'])->name('data-user');
+    Route::get('/data-driver', [AdminController::class, 'getTableDriver'])->name('data-driver');
+});
 
-// History Routes
-Route::get('riwayat', [UserController::class, 'getHistory'])->name('history');
-Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
+Route::middleware(OnlyCustomer::class)->group(function () {
+    // User Routes
+    Route::get('home', [UserController::class, 'getHome']);
 
-// Redeem Points Routes
-Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
-Route::get('redeem-point', [UserController::class, 'reedemPoint']);
-Route::post('store-redeem-point', [UserController::class, 'storeReedemPoint']);
+    // Order Routes
+    Route::get('order', [UserController::class, 'createOrder']);
+    Route::post('order', [UserController::class, 'submitOrder'])->name('order');
+    Route::delete('order/{id}', [UserController::class, 'destroy'])->name('order.destroy');
+    Route::get('success-payment', [UserController::class, 'getSuccessPayment']);
 
-// Customer Service Routes
-Route::get('customer-service', [UserController::class, 'getCustomerService']);
-Route::post('customer-service', [UserController::class, 'submitComplaint']);
+    // History Routes
+    Route::get('riwayat', [UserController::class, 'getHistory'])->name('history');
+    Route::delete('history/{id}', [UserController::class, 'deleteHistory'])->name('history.delete');
 
-// Article Routes
-Route::get('article', [UserController::class, 'getArticle']);
-Route::get('/read-article/{article_id}', [UserController::class, 'getDetailArticle'])->name('read-article');
+    // Redeem Points Routes
+    Route::get('redeemspoints', [UserController::class, 'getRedeemspoints']);
+    Route::get('redeem-point', [UserController::class, 'reedemPoint']);
+    Route::post('store-redeem-point', [UserController::class, 'storeReedemPoint']);
 
-// Report Routes
-Route::get('/laporan', [AdminController::class, 'getLaporan'])->name('laporan');
-Route::get('/get-table/{tableId}', [AdminController::class, 'getTable'])->name('getTable');
-Route::get('/data-vehicles', [AdminController::class, 'getTableVehicle'])->name('data-vehicles');
-Route::get('/data-cs', [AdminController::class, 'getTableCS'])->name('data-cs');
-Route::get('/data-point', [AdminController::class, 'getTablePoint'])->name('data-point');
-Route::get('/data-user', [AdminController::class, 'getTableUser'])->name('data-user');
-Route::get('/data-driver', [AdminController::class, 'getTableDriver'])->name('data-driver');
+    // Customer Service Routes
+    Route::get('customer-service', [UserController::class, 'getCustomerService']);
+    Route::post('customer-service', [UserController::class, 'submitComplaint']);
 
-// User Store Route
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+    // Article Routes
+    Route::get('article', [UserController::class, 'getArticle']);
+    Route::get('/read-article/{article_id}', [UserController::class, 'getDetailArticle'])->name('read-article');
 
-// Voucher Routes
-Route::get('/voucher', [VoucherController::class, 'index'])->name('voucher.index');
-Route::get('/voucher/create', [VoucherController::class, 'create'])->name('voucher.create');
-Route::post('/voucher', [VoucherController::class, 'store'])->name('voucher.store');
-Route::get('/voucher/{voucher}', [VoucherController::class, 'show'])->name('voucher.show');
-Route::get('/voucher/{voucher}/edit', [VoucherController::class, 'edit'])->name('voucher.edit');
-Route::post('/voucher-update', [VoucherController::class, 'update'])->name('voucher.update');
-Route::get('/voucher-delete/{id}', [VoucherController::class, 'destroy'])->name('voucher.destroy');
+    // User Store Route
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
+
+});

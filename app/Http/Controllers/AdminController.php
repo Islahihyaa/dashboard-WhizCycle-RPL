@@ -352,27 +352,39 @@ class AdminController extends Controller
         $request->validate([
             'name_driver' => 'required',
             'phoneNo_driver' => 'required',
-            'license_number' => 'required',
-            'image_driver' => 'required',
+            'license_number' => 'required|unique:driver',
+            'image_driver' => 'required',   
             'vehicle_id' => 'required',
         ]);
 
-        $driver_image_path = $request->file('image_driver')->store('driver-image', 'public');
-
-        $createAddDriver = Driver::create([
-            'name_driver' => $request->input('name_driver'),
-            'phoneNo_driver'=> $request->input('phoneNo_driver'),
-            'license_number' => $request->input('license_number'),
-            'image_driver' => $driver_image_path,
-            'vehicle_id' => $request->input('vehicle_id'),
-        ]);
-
-        if($createAddDriver) {
-            Session::flash('status','Data Driver Berhasil Ditambahkan');
-            return redirect('add-driver');
-        } else {
-            Session::flash('notSetDataMessage', 'Data Driver Gagal Ditambahkan');
-            return redirect('add-driver');
+        try {
+            $driver_image_path = $request->file('image_driver')->store('driver-image', 'public');
+    
+            $createAddDriver = Driver::create([
+                'name_driver' => $request->input('name_driver'),
+                'phoneNo_driver'=> $request->input('phoneNo_driver'),
+                'license_number' => $request->input('license_number'),
+                'image_driver' => $driver_image_path,
+                'vehicle_id' => $request->input('vehicle_id'),
+            ]);
+    
+            if($createAddDriver) {
+                Session::flash('status','Data Driver Berhasil Ditambahkan');
+                return redirect('add-driver');
+            } else {
+                Session::flash('notSetDataMessage', 'Data Driver Gagal Ditambahkan');
+                return redirect('add-driver');
+            }
+        } catch (QueryException $e) {
+            // Handle QueryException
+            $errorCode = $e->errorInfo[1];
+            if ($errorCode == 1062) { // Check if it's a duplicate entry error
+                Session::flash('notSetDataMessage', 'Nomor Lisensi telah digunakan.'); // Flash the error message
+                return redirect('add-driver')->withInput(); // Redirect back to the form with input data
+            } else {
+                Session::flash('notSetDataMessage', 'Terjadi kesalahan saat menambahkan data driver.'); // Or handle other errors
+                return redirect('add-driver')->withInput(); // Redirect back to the form with input data
+            }
         }
     }
 

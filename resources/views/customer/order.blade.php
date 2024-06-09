@@ -21,7 +21,7 @@
                     <hr>
 
                         <!-- Biodata Form Elements -->
-                        <form action="order" method="post">
+                        <form id="orderForm" action="order" method="post">
                             @csrf
                             <div class="row mb-3">
                                 <label for="inputName" class="col-sm-2 col-form-label">Name</label>
