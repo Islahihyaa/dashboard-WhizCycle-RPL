@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Voucher;
-
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
+    //Show Dashboard
     public function getHome()
     {
         $user_data = Auth::user();
@@ -25,6 +25,9 @@ class UserController extends Controller
             'data_article' => $data_article,
         ]);
     }
+    // End Show Dashboard
+
+    //Create Order
     public function createOrder()
     {
         return view('customer.order');
@@ -114,9 +117,15 @@ class UserController extends Controller
                 }
                 $user->save();
             }
-            return view ('customer.form-success');
+            return redirect ('success-payment');
         }
     }
+
+    public function getSuccessPayment()
+    {
+        return view('customer.form-success');
+    }
+    // End Create Order
 
     public function getRedeemspoints()
     {
@@ -199,30 +208,5 @@ class UserController extends Controller
             'article' => $data_article
         ]);
     }
+    
 }
-
-//     public function delete($id)
-// {
-//     // Cari mobil berdasarkan ID
-//     $order = Order::find($id);
-
-//     // Pastikan mobil ditemukan
-//     if (!$history) {
-//         return redirect()->back()->with('error', 'order tidak ditemukan.');
-//     }
-
-//     // Hapus mobil
-//     $history->delete();
-
-//     // Redirect kembali ke halaman sebelumnya dengan pesan sukses
-//     return redirect()->back()->with('success', 'Mobil berhasil dihapus.');
-// }
-
-    
-    
-
-
-
-
-
-

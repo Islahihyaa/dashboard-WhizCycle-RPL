@@ -74,19 +74,6 @@
                             </div>
                         </form>
                     </div>
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        @foreach ($errors->all() as $error)
-                            <p>{{ $error }}</p>
-                        @endforeach
-                    </div>
-                    @endif
-                    @if(Session::has('status'))
-                        <div class="alert alert-success"> {{ Session::get('status') }}</div>
-                    @endif
-                    @if(Session::has('notSetDataMessage'))
-                        <div class="alert alert-success"> {{ Session::get('notSetDataMessage') }}</div>
-                    @endif
                     </div>
                 </div>
             </div>

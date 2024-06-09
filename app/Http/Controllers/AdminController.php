@@ -45,30 +45,48 @@ class AdminController extends Controller
         return view('admin.manageuser', ['users' => $users]);
     }
 
-    public function edit(User $user)
+    public function edit($user_id)
     {
+        $user = User::find($user_id);
         return view('admin.edit', compact('user'));
     }
 
-    public function update(Request $request, User $user)
-{
-    // Validate the incoming request data
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'role_id' => 'required|integer',
-        'address' => 'nullable|string|max:255',
-        'phoneNo' => 'nullable|string|max:15',
-        'created_at' => 'required|date',
-        'total_points' => 'required|integer'
-    ]);
-
-    // Update the user with the validated data
+    public function update(Request $request, $user_id)
     {
-    $user->update($request->all());
+        $user = User::find($user_id);   
 
-    // Redirect to a page after updating
-    return redirect()->route('manageuser')->with('success', 'User updated successfully.');
-}
+
+        // Update pengguna dengan data yang divalidasi
+        $user->name = $request->input('name');
+        $user->role_id = $request->input('role_id');
+        $user->address = $request->input('address');
+        $user->phoneNo = $request->input('phoneNo');
+        $user->created_at = $request->input('created_at');
+        $user->total_points = $request->input('total_points');
+
+        // Simpan perubahan
+        $user->save();
+        
+        if($user) {
+            // Redirect to a page after updating
+            return redirect()->route('manageuser')->with('success', 'User updated successfully.');
+        } else {
+            dd('error');
+        }
+        
+    }
+
+    public function delete($user_id)
+    {
+        $deleteUser = User::find($user_id);
+                
+        if($deleteUser) {
+            $deleteUser->delete();
+            Session::flash('deleteUsert','Data Deleted Succesfully');
+            return redirect('manageuser');
+        } else {
+            dd($deleteUser);
+        }
     }
 
     public function getResponseComplaint()

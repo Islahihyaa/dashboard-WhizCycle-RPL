@@ -32,7 +32,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'phoneNo' => 'required|min:5|max:11',
+            'phoneNo' => 'required|min:5',
             'password' => 'required|min:3',
         ]);
 
@@ -44,7 +44,7 @@ class AuthController extends Controller
         ]);
 
         Session::flash('status','Register Success');
-        return redirect ('/');
+        return redirect ('/login');
     }
 
     public function authenticating(Request $request)
@@ -63,7 +63,7 @@ class AuthController extends Controller
             }
         } else {
             Session::flash('message','Account not found');
-            return redirect('/');
+            return redirect('/login');
         }
     }
 

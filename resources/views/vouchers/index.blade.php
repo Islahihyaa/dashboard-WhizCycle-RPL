@@ -2,6 +2,8 @@
 
 @section('title', 'WhizCycle')
 
+@section('voucher', 'active')
+
 @section('content')
 
 <main id="main" class="main">

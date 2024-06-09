@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 card-img-container">
-                                    <img src="https://nuts.com/images/rackcdn/ed910ae2d60f0d25bcb8-80550f96b5feb12604f4f720bfefb46d.ssl.cf1.rackcdn.com/5788%20Chocolate%20Gold%20-xnBkCoaB-zoom.jpg" alt="image" class="card-img">
+                                    <img src="{{ asset('images/image-tukar-point.jpg') }}" alt="image" class="card-img">
                                 </div>
                                 <div class="col-md-6">
                                     <br><br><br>
