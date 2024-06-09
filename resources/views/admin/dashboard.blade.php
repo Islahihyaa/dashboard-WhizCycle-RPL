@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <h5 class="card-title">Total Setoran</h5>
-                                    <h1 class="card-total"> {{ $recyle_total }} Setoran</h1>
+                                    <h1 class="card-total"> {{ $recyle_total }} KG Setoran</h1>
                                 </div>
                             <div class="col-md-3 card-img-container">
                                 <img src="{{ asset('images/dashboard-icon2.png') }}" alt="image" class="card-img">
