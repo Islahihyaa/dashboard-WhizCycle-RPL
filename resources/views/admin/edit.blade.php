@@ -3,6 +3,8 @@
 @section('title', 'Edit User')
 
 @section('content')
+
+<main id="main" class="main">
     <div class="container">
         <h1>Edit User</h1>
         <form action="{{ route('user.update', $user->user_id) }}" method="post">
@@ -35,6 +37,8 @@
             <button type="submit" class="btn btn-primary">Update</button>
         </form>
     </div>
+
+</main><!-- End #main -->
 
     
 @endsection

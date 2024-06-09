@@ -2,7 +2,7 @@
 
 @section('title', 'WhizCycle | Redeem Point History')
 
-@section('redeem-point-history', 'active')
+@section('manage-redeem', 'active')
 
 @section('content')
 

@@ -63,7 +63,6 @@
             <li>
               <hr class="dropdown-divider">
             </li>
-
             <li>
               <a class="dropdown-item d-flex align-items-center" href="logout">
                 <i class="bi bi-box-arrow-right"></i>
@@ -106,7 +105,7 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link @yield('redeem-point')" href="{{url('/redeem-point')}}">
+        <a class="nav-link @yield('tukarpoint')" href="<?= url('redeem-point') ?>">
           <i class="bi bi-star-fill"></i>
           <span>Tukar Point </span>
         </a>

@@ -1,121 +1,22 @@
 @extends('admin-layout')
 
-@section('title', 'WhizCycle | User Management')
-
-@section('manageuser', 'active')
+@section('title', 'WhizCycle | Laporan')
 
 @section('content')
-
-<style>
-    .main {
-        padding: 20px;
-        background-color: #f4f7fa;
-    }
-
-    .pagetitle h1 {
-        color: #333;
-        font-size: 24px;
-    }
-
-    .search-bar {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-
-    .search-bar input[type="text"], .search-bar select {
-        flex-grow: 1;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .btn-primary, .btn-sort {
-        background-color: #0d6efd;
-        border: none;
-        padding: 10px 20px;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-    }
-
-    .table th, .table td {
-        padding: 12px;
-        border-bottom: 1px solid #dee2e6;
-        cursor: pointer; /* Make headers clickable */
-    }
-
-    .table th {
-        background-color: #f8f9fa;
-        color: #212529;
-    }
-
-    .table td {
-        vertical-align: middle;
-    }
-
-    .btn-edit, .btn-delete {
-        padding: 5px 10px;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .btn-edit {
-        background-color: #0d6efd;
-    }
-
-    .btn-delete {
-        background-color: #dc3545;
-    }
-
-    .pagination {
-        display: flex;
-        list-style: none;
-        padding: 0;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .pagination .page-item {
-        margin: 0 5px;
-    }
-
-    .pagination .page-link {
-        color: #0d6efd;
-        text-decoration: none;
-        padding: 8px 12px;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-        border-radius: 5px;
-    }
-
-    .pagination .page-item.active .page-link {
-        background-color: #0d6efd;
-        border-color: #0d6efd;
-        color: #fff;
-    }
-</style>
-
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>User Management</h1>
+        <h1>Laporan</h1>
     </div>
     <section class="section">
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">User Management</h5>
+                        <h5 class="card-title">Reports</h5>
                         <hr>
                         <div class="col">
+                            <!-- Export Button -->
+                            <button id="exportButton" class="btn btn-success mb-3">Export to XLSX</button>
                             <table class="table datatable" id="userManagementTable">
                                 <thead class="table-light">
                                     <tr>
@@ -139,10 +40,10 @@
                                                 {{ $user->role }}
                                             @endif
                                         </td>
-                                        <td>{{ $user->created_at->format('d M, Y') }}</td>
+                                        <td>{{ $user->created_at ? $user->created_at->format('d M, Y') : 'N/A' }}</td>
                                         <td>{{ $user->total_points }}</td>
                                         <td>
-                                            <div class="filter">
+                                        <div class="filter">
                                                 <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="bi bi-three-dots m-3"></i>
                                                 </a>
@@ -171,28 +72,17 @@
     </section>
 </main>
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-<!-- Initialize DataTables -->
+<!-- Include SheetJS Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<!-- Export to XLSX Script -->
 <script>
-    $(document).ready(function() {
-        $('#userManagementTable').DataTable({
-            "order": [[ 0, "asc" ]], // Default sort by first column (Name)
-            "columnDefs": [
-                { "orderable": true, "targets": 0 }, // Name column
-                { "orderable": true, "targets": 1 }, // Role column
-                { "orderable": true, "targets": 2 }, // Create Date column
-                { "orderable": true, "targets": 3 }, // Point column
-                { "orderable": false, "targets": 4 } // Actions column, disable sorting
-            ]
-        });
+    document.getElementById('exportButton').addEventListener('click', function() {
+        // Extract table data
+        var table = document.getElementById('userManagementTable');
+        var wb = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
+
+        // Export to XLSX
+        XLSX.writeFile(wb, 'user_management_table.xlsx');
     });
 </script>
 @endsection

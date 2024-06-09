@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class UpdateSetoranSampahTest extends DuskTestCase
+class ReadSetoranSampahTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -23,11 +23,7 @@ class UpdateSetoranSampahTest extends DuskTestCase
                     ->press('Masuk')
                     ->assertPathIs('/dashboard')
                     ->clickLink('Setoran Sampah')
-                    ->assertPathIs('/manage-order')
-                    ->clickLink('Detail')
-                    ->assertPathBeginsWith('/manage-order-detail/')
-                    ->press('SUBMIT')
-                    ->assertPathIs('/manage-order'); // Verify if the path is correct after submission
+                    ->assertPathIs('/manage-order');
         });
     }
 }

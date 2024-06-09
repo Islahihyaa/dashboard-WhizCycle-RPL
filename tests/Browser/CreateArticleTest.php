@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class UpdateSetoranSampahTest extends DuskTestCase
+class CreateArticleTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -22,12 +22,15 @@ class UpdateSetoranSampahTest extends DuskTestCase
                     ->type('password', '1234')
                     ->press('Masuk')
                     ->assertPathIs('/dashboard')
-                    ->clickLink('Setoran Sampah')
-                    ->assertPathIs('/manage-order')
-                    ->clickLink('Detail')
-                    ->assertPathBeginsWith('/manage-order-detail/')
-                    ->press('SUBMIT')
-                    ->assertPathIs('/manage-order'); // Verify if the path is correct after submission
+                    ->clickLink('Edukasi Lingkungan')
+                    ->assertPathIs('/manage-article')
+                    ->clickLink('Tambah Artikel')
+                    ->assertPathIs('/add-article')
+                    ->press ('PUBLISH');
+
+
+
+
         });
     }
 }
