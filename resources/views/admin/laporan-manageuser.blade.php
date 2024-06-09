@@ -43,7 +43,7 @@
                                         <td>{{ $user->created_at ? $user->created_at->format('d M, Y') : 'N/A' }}</td>
                                         <td>{{ $user->total_points }}</td>
                                         <td>
-                                            <div class="filter">
+                                        <div class="filter">
                                                 <a class="icon" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i class="bi bi-three-dots m-3"></i>
                                                 </a>
@@ -51,16 +51,12 @@
                                                     <li class="dropdown-header text-start">
                                                         <h6>Actions</h6>
                                                     </li>
-                                                    <li>
-                                                        <a href="{{ route('admin.edit', ['user' => $user->user_id]) }}" class="dropdown-item"><i class="bi bi-pencil-square"></i> Edit</a>
-                                                    </li>
-                                                    <li>
-                                                        <form method="POST" action="{{ route('admin.delete', ['user' => $user->user_id]) }}">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="dropdown-item"><i class="bi bi-trash"></i> Delete</button>
-                                                        </form>
-                                                    </li>
+                                                    <form method="POST" action="{{ route('admin.delete', ['user_id' => $user->user_id]) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a href="{{ route('admin.edit', ['user_id' => $user->user_id]) }}" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i> Edit</a>
+                                                        <button class="btn btn-delete">Delete</button>
+                                                    </form>
                                                 </ul>
                                             </div>
                                         </td>
@@ -84,7 +80,7 @@
         // Extract table data
         var table = document.getElementById('userManagementTable');
         var wb = XLSX.utils.table_to_book(table, {sheet: "Sheet JS"});
-        
+
         // Export to XLSX
         XLSX.writeFile(wb, 'user_management_table.xlsx');
     });

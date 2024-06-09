@@ -28,13 +28,12 @@
                                     <h1 style="color:green;margin-left:70px;"><?= auth()->user()->total_points ?> Points</h1>
                                 </div>
                                 <div class="col-md-9">
-                                    <h4>1 Kg sampah = 5 points</h4>
                                     <h5>Setor sampah lebih banyak untuk mendapatkan poin!</h5>
                                 </div>
                                 <div class="col-md-3">
                                 <button class="btn btn-success" style="font-size: 20px; padding: 15px 25px;margin-left:50px;" onclick="history()">History</button>
                                     <br>
-                                    <p style="color:green">ketuk untuk melihat riwaya tukar point</p>
+                                    <p style="color:green">ketuk untuk melihat riwayat tukar point</p>
                                 </div>
                         </div>
                     </div>
