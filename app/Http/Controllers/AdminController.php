@@ -35,9 +35,10 @@ class AdminController extends Controller
     }
 
     public function getManageUser()
-    {
-        return view('admin.manageuser', ['users' => $users]);
-    }
+{
+    $users = User::all();
+    return view('admin.manageuser', ['users' => $users]);
+}
 
     public function showUsers()
     {

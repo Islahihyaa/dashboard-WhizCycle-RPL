@@ -52,10 +52,9 @@
                                                         <h6>Actions</h6>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('admin.edit', ['user' => $user->user_id]) }}" class="dropdown-item"><i class="bi bi-pencil-square"></i> Edit</a>
-                                                    </li>
+                                                        <a href="{{ route('admin.edit', ['user_id' => $user->user_id]) }}" class="dropdown-item"><i class="bi bi-pencil-square"></i> Edit</a>
                                                     <li>
-                                                        <form method="POST" action="{{ route('admin.delete', ['user' => $user->user_id]) }}">
+                                                        <form method="POST" action="{{ route('admin.delete', ['user_id' => $user->user_id]) }}">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit" class="dropdown-item"><i class="bi bi-trash"></i> Delete</button>

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
+class LoginAdminTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -18,10 +18,10 @@ class LoginTest extends DuskTestCase
                     ->assertSee('WhizCycle!')
                     ->clickLink('Login')
                     ->assertPathIs('/login')
-                    ->type('name', 'nazwa')
+                    ->type('name', 'admin')
                     ->type('password', '1234')
                     ->press('Masuk')
-                    ->assertPathIs('/home');
+                    ->assertPathIs('/dashboard');
         });
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
+class DeleteHistoryTest  extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -21,7 +20,9 @@ class LoginTest extends DuskTestCase
                     ->type('name', 'nazwa')
                     ->type('password', '1234')
                     ->press('Masuk')
-                    ->assertPathIs('/home');
+                    ->assertPathIs('/home')
+                    ->visit('/riwayat')
+                    ->press('Batalkan');
         });
     }
 }

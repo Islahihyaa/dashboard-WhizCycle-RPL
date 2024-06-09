@@ -2,11 +2,10 @@
 
 namespace Tests\Browser;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class LoginTest extends DuskTestCase
+class readHistoryTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
@@ -14,6 +13,7 @@ class LoginTest extends DuskTestCase
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
+            // Visit the home page and assert 'Home' text is present
             $browser->visit('/')
                     ->assertSee('WhizCycle!')
                     ->clickLink('Login')
@@ -21,7 +21,8 @@ class LoginTest extends DuskTestCase
                     ->type('name', 'nazwa')
                     ->type('password', '1234')
                     ->press('Masuk')
-                    ->assertPathIs('/home');
+                    ->assertPathIs('/home')
+                    ->visit('/riwayat');
         });
     }
 }
